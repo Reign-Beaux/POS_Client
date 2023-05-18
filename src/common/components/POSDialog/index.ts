@@ -1,0 +1,1 @@
+export { default as POSDialog } from './POSDialog';
