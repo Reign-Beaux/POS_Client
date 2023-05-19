@@ -1,4 +1,3 @@
-import { emailRegex } from "@/common/consts";
 import SaveIcon from "@mui/icons-material/Save";
 import { Box, DialogActions, DialogContent } from "@mui/material";
 import {
@@ -9,6 +8,7 @@ import {
   POSSelect,
   POSTextField,
 } from "common/components";
+import { emailRegex } from "common/consts";
 import { useAxios } from "common/custom-hooks";
 import { SelectDTO } from "common/dtos";
 import { User, userEmpty } from "common/models";

@@ -111,6 +111,7 @@ const AreaDataGrid: React.FC<AreaDataGridProps> = () => {
     handleRemove();
     resetResponse();
   }, [response]);
+
   return <POSDataGrid dataSource={areas} columns={columns} />;
 };
 

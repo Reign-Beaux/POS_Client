@@ -1,6 +1,6 @@
-import { POSButton, POSDialog, POSDialogTitle, POSTextField } from "@/common/components";
-import { useAxios } from "@/common/custom-hooks";
-import { ArticleType, articleTypeEmpty } from "@/common/models";
+import { POSButton, POSDialog, POSDialogTitle, POSTextField } from "common/components";
+import { useAxios } from "common/custom-hooks";
+import { ArticleType, articleTypeEmpty } from "common/models";
 import SaveIcon from "@mui/icons-material/Save";
 import { DialogActions, DialogContent } from "@mui/material";
 import { Box } from "@mui/system";

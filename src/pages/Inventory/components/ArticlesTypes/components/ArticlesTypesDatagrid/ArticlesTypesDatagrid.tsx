@@ -1,6 +1,6 @@
-import { POSDataGrid } from "@/common/components";
-import { useAxios, useDialogConfirm } from "@/common/custom-hooks";
-import { ArticleType } from "@/common/models";
+import { POSDataGrid } from "common/components";
+import { useAxios, useDialogConfirm } from "common/custom-hooks";
+import { ArticleType } from "common/models";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { IconButton, Tooltip } from "@mui/material";
