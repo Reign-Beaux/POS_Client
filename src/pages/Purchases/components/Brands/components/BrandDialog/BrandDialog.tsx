@@ -1,28 +1,20 @@
-import {
-  POSButton,
-  POSCheckbox,
-  POSDialog,
-  POSDialogTitle,
-  POSSelect,
-  POSTextField,
-} from "common/components";
+import { POSButton, POSDialog, POSDialogTitle, POSTextField } from "common/components";
 import { useAxios } from "common/custom-hooks";
-import { Article, articleEmpty } from "common/models";
+import { Brand, brandEmpty } from "common/models";
 import SaveIcon from "@mui/icons-material/Save";
 import { DialogActions, DialogContent } from "@mui/material";
 import { Box } from "@mui/system";
 import { useFormik } from "formik";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import * as Yup from "yup";
-import { useArticlesContext } from "../../context";
-import { SelectDTO } from "common/dtos";
+import { useBrandContext } from "../../context";
 
-export type ArticlesDialogProps = {};
+export type BrandDialogProps = {};
 
-interface FormValues extends Article {}
-const initialValues: FormValues = { ...articleEmpty };
+interface FormValues extends Brand {}
+const initialValues: FormValues = { ...brandEmpty };
 
-const ArticlesDialog: React.FC<ArticlesDialogProps> = () => {
+const BrandDialog: React.FC<BrandDialogProps> = () => {
   const {
     isOpenDialog,
     setIsOpenDialog,
@@ -30,13 +22,11 @@ const ArticlesDialog: React.FC<ArticlesDialogProps> = () => {
     setIsGridLoading,
     idSelected,
     setIdSelected,
-  } = useArticlesContext();
-  const { post, update, getById } = useAxios("Articles");
-  const { getAll } = useAxios("Selects");
-  const [articleType, setArticleType] = useState<SelectDTO[]>([]);
+  } = useBrandContext();
+  const { post, update, getById } = useAxios("Brands");
 
   const handleSubmit = async (values: FormValues) => {
-    const response = !values.id ? await post<Article>(values) : await update<Article>(values);
+    const response = !values.id ? await post<Brand>(values) : await update<Brand>(values);
     if (!response.success) return;
 
     setIsGridLoading(true);
@@ -44,7 +34,6 @@ const ArticlesDialog: React.FC<ArticlesDialogProps> = () => {
   };
 
   const validationSchema = Yup.object({
-    articleTypeId: Yup.number().moreThan(0, "Required"),
     code: Yup.string().required("Required"),
     description: Yup.string().required("Required"),
   });
@@ -55,15 +44,10 @@ const ArticlesDialog: React.FC<ArticlesDialogProps> = () => {
     onSubmit: handleSubmit,
   });
 
-  const getArticle = async (id: number) => {
+  const getBrand = async (id: number) => {
     const response = await getById<FormValues>(id);
     formik.setValues(response);
     setIdSelected(0);
-  };
-
-  const getArticlesTypes = async () => {
-    const response = await getAll<SelectDTO>("GetArticlesTypes");
-    setArticleType(response);
   };
 
   useEffect(() => {
@@ -71,10 +55,9 @@ const ArticlesDialog: React.FC<ArticlesDialogProps> = () => {
       formik.resetForm();
       return;
     }
-    getArticlesTypes();
     if (!idSelected) return;
 
-    getArticle(idSelected);
+    getBrand(idSelected);
   }, [isOpenDialog]);
 
   return (
@@ -82,15 +65,8 @@ const ArticlesDialog: React.FC<ArticlesDialogProps> = () => {
       <POSDialogTitle titleDialog={titleDialog} setIsOpenDialog={setIsOpenDialog} />
       <Box component="form" onSubmit={formik.handleSubmit}>
         <DialogContent>
-          <POSSelect
-            keyFormik="articleTypeId"
-            label="Tipo de articulo"
-            formik={formik}
-            datas={articleType}
-          />
           <POSTextField keyFormik="code" label="Código" formik={formik} />
           <POSTextField keyFormik="description" label="Descripción" formik={formik} />
-          <POSCheckbox keyFormik="isActive" label="Activo" formik={formik} />
         </DialogContent>
         <DialogActions>
           <POSButton type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
@@ -102,4 +78,4 @@ const ArticlesDialog: React.FC<ArticlesDialogProps> = () => {
   );
 };
 
-export default ArticlesDialog;
+export default BrandDialog;
