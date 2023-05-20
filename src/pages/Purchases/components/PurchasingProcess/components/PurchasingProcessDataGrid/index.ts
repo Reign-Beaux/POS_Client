@@ -1,0 +1,1 @@
+export { default as PurchasingProcessDataGrid } from './PurchasingProcessDataGrid';
