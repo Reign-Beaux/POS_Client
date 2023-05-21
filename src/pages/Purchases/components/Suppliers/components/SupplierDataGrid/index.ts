@@ -1,0 +1,1 @@
+export { default as SupplierDataGrid } from './SupplierDataGrid';

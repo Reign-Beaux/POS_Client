@@ -1,7 +1,7 @@
 import { POSTabPanel, POSTabs } from "common/components";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
-import { Brands, PurchasingProcess, Suppliers } from "./components";
+import { Brands, PurchaseReception, PurchasingProcess, Suppliers } from "./components";
 export interface PurchasesProps {}
 
 const Purchases: React.FC<PurchasesProps> = () => {
@@ -11,6 +11,7 @@ const Purchases: React.FC<PurchasesProps> = () => {
 
   return (
     <Box
+      id="box-purchases"
       sx={{
         width: "100%",
         height: "100%",
@@ -27,7 +28,7 @@ const Purchases: React.FC<PurchasesProps> = () => {
         <Brands />
       </POSTabPanel>
       <POSTabPanel value={value} index={3}>
-        <Suppliers />
+        <PurchaseReception />
       </POSTabPanel>
     </Box>
   );
