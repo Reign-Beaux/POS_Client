@@ -6,14 +6,13 @@ export type POSTabPanelProps = {
   value: number;
 }
 
-const POSTabPanel: React.FC<POSTabPanelProps> = ({ children, value, index, ...other }) => {
+const POSTabPanel: React.FC<POSTabPanelProps> = ({ children, value, index }) => {
   return (
     <div
       role="tabpanel"
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
-      {...other}
     >
       {value === index && <>{children}</>}
     </div>
