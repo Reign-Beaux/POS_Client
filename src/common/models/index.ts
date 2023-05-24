@@ -8,4 +8,5 @@ export * from './inventory';
 export * from './posCatalogue';
 export * from './posTransactionResult';
 export * from './role';
+export * from './supplier';
 export * from './user';

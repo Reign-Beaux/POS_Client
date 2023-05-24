@@ -1,15 +1,14 @@
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { IconButton, Tooltip } from '@mui/material';
-import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
-import { POSDataGrid } from 'common/components';
-import { useAxios, useDialogConfirm } from 'common/custom-hooks';
-import { SupplierDTO } from 'common/dtos';
-import React, { useEffect, useState } from 'react';
-import { useSupplierContext } from '../../context';
+import { IconButton, Tooltip } from "@mui/material";
+import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
+import { POSDataGrid } from "common/components";
+import { useAxios, useDialogConfirm } from "common/custom-hooks";
+import { SupplierDTO } from "common/dtos";
+import React, { useEffect, useState } from "react";
+import { useSupplierContext } from "../../context";
 
-export type SupplierDataGridProps = {
-}
+export type SupplierDataGridProps = {};
 
 const SupplierDataGrid: React.FC<SupplierDataGridProps> = () => {
   const {
@@ -48,7 +47,7 @@ const SupplierDataGrid: React.FC<SupplierDataGridProps> = () => {
     setIdSelected(id);
     showDialogConfirm("¿Desea eliminar el registro?");
   };
-	
+
   const columns: GridColDef[] = [
     {
       field: "name",
@@ -127,16 +126,14 @@ const SupplierDataGrid: React.FC<SupplierDataGridProps> = () => {
           <Tooltip title="Actualizar área">
             <IconButton
               aria-label="update-student"
-              onClick={() => handleShowDialogToUpdate(params.row.id)}
-            >
+              onClick={() => handleShowDialogToUpdate(params.row.id)}>
               <EditIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="Eliminar área">
             <IconButton
               aria-label="delete-subject"
-              onClick={() => handleShowConfirmDialog(params.row.id)}
-            >
+              onClick={() => handleShowConfirmDialog(params.row.id)}>
               <DeleteIcon />
             </IconButton>
           </Tooltip>

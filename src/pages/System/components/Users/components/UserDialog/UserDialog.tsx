@@ -104,16 +104,6 @@ const UserDialog: React.FC<UserDialogProps> = () => {
     setRoles(response);
   };
 
-  // const execValidation = () => {
-  //   const fieldKeys = Object.keys(formik.values);
-  //   const touchedFields = fieldKeys.reduce((acc: any, fieldKey) => {
-  //     acc[fieldKey] = true;
-  //     return acc;
-  //   }, {});
-  //   debugger;
-  //   formik.setTouched({passwordConfirm: true});
-  // }
-
   useEffect(() => {
     if (!isOpenDialog) {
       formik.resetForm();
