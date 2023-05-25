@@ -1,6 +1,6 @@
 import React from 'react';
 import { PurchasingProcessProvider } from './context';
-import { PurchasingProcessActionButtons, PurchasingProcessDataGrid } from './components';
+import { PurchasingProcessActionButtons, PurchasingProcessDataGrid, PurchasingProcessDialog } from './components';
 
 export type PurchasingProcessProps = {
 }
@@ -10,7 +10,7 @@ const PurchasingProcess: React.FC<PurchasingProcessProps> = () => {
 		<PurchasingProcessProvider>
 			<PurchasingProcessActionButtons />
 			<PurchasingProcessDataGrid />
-			<PurchasingProcessDataGrid />
+			<PurchasingProcessDialog />
 		</PurchasingProcessProvider>
 	);
 };
