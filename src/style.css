@@ -1,3 +1,17 @@
 body {
   margin: 0px;
 }
+
+/* Estilos para el scroll vertical */
+::-webkit-scrollbar {
+  width: 10px; /* Ancho del scroll */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #edf2f9; /* Color del fondo del track */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #9d9c9c; /* Color del thumb */
+  border-radius: 5px; /* Radio de esquina del thumb */
+}
