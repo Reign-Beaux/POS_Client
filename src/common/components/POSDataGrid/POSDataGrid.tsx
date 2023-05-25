@@ -11,7 +11,7 @@ export interface POSDataGridProps {
 const POSDataGrid: React.FC<POSDataGridProps> = ({ dataSource, columns }) => {
   const theme = useTheme();
   const pageSizeOptions = [5, 10, 50];
-
+ 
   return (
     <StyleDataGrid
       rows={dataSource}
