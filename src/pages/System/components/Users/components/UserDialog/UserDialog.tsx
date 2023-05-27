@@ -22,7 +22,7 @@ export type UserDialogProps = {};
 interface FormValues extends User {
   passwordConfirm: string;
 }
-const initialValues: FormValues = { ...userEmpty, ...{ passwordConfirm: "" } };
+const initialValues: FormValues = { ...userEmpty, passwordConfirm: "" };
 
 const UserDialog: React.FC<UserDialogProps> = () => {
   const {
