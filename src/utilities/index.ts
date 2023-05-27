@@ -1,2 +1,2 @@
 export * from './fetchConfig';
-export * from './interceptors';
+export * from './parseJwt';
