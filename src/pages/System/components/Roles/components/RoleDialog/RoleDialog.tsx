@@ -61,7 +61,7 @@ const RoleDialog: React.FC<RoleDialogProps> = () => {
   }, [isOpenDialog]);
 
   return (
-    <POSDialog isOpen={isOpenDialog}>
+    <POSDialog open={isOpenDialog}>
       <POSDialogTitle titleDialog={titleDialog} setIsOpenDialog={setIsOpenDialog} />
       <Box component="form" onSubmit={formik.handleSubmit}>
         <DialogContent>

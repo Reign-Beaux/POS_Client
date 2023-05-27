@@ -1,14 +1,13 @@
-import { Dialog } from "@mui/material";
+import { Dialog, DialogProps } from "@mui/material";
 import React from "react";
 
-export interface POSDialogProps {
-  isOpen: boolean;
+export interface POSDialogProps extends DialogProps {
   children: React.ReactNode;
 }
 
-const POSDialog: React.FC<POSDialogProps> = ({ isOpen, children }) => {
+const POSDialog: React.FC<POSDialogProps> = ({ children, ...rest }) => {
   return (
-    <Dialog open={isOpen} fullWidth>
+    <Dialog fullWidth {...rest}>
       {children}
     </Dialog>
   );
