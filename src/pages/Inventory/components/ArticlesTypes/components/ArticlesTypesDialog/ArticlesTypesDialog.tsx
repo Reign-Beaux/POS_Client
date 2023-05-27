@@ -1,9 +1,9 @@
-import { POSButton, POSDialog, POSDialogTitle, POSTextField } from "common/components";
-import { useAxios } from "common/custom-hooks";
-import { ArticleType, articleTypeEmpty } from "common/models";
 import SaveIcon from "@mui/icons-material/Save";
 import { DialogActions, DialogContent } from "@mui/material";
 import { Box } from "@mui/system";
+import { POSButton, POSDialog, POSDialogHeader, POSTextField } from "common/components";
+import { useAxios } from "common/custom-hooks";
+import { ArticleType, articleTypeEmpty } from "common/models";
 import { useFormik } from "formik";
 import React, { useEffect } from "react";
 import * as Yup from "yup";
@@ -64,7 +64,7 @@ const ArticlesTypesDialog: React.FC<ArticlesTypesDialogProps> = () => {
 
   return (
     <POSDialog open={isOpenDialog}>
-      <POSDialogTitle titleDialog={titleDialog} setIsOpenDialog={setIsOpenDialog} />
+      <POSDialogHeader titleDialog={titleDialog} setIsOpenDialog={setIsOpenDialog} />
       <Box component="form" onSubmit={formik.handleSubmit}>
         <DialogContent>
           <POSTextField keyFormik="code" label="Código" formik={formik} />

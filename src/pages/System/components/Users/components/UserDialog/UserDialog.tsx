@@ -3,10 +3,10 @@ import { Box, DialogActions, DialogContent } from "@mui/material";
 import {
   POSButton,
   POSDialog,
-  POSDialogTitle,
+  POSDialogHeader,
   POSPassField,
   POSSelect,
-  POSTextField,
+  POSTextField
 } from "common/components";
 import { emailRegex } from "common/consts";
 import { useAxios } from "common/custom-hooks";
@@ -120,7 +120,7 @@ const UserDialog: React.FC<UserDialogProps> = () => {
 
   return (
     <POSDialog open={isOpenDialog}>
-      <POSDialogTitle titleDialog={titleDialog} setIsOpenDialog={setIsOpenDialog} />
+      <POSDialogHeader titleDialog={titleDialog} setIsOpenDialog={setIsOpenDialog} />
       <Box component="form" onSubmit={formik.handleSubmit}>
         <DialogContent>
           <POSTextField keyFormik="username" label="Nombre de usuario" formik={formik} />

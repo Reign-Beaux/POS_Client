@@ -1,7 +1,7 @@
 import SaveIcon from "@mui/icons-material/Save";
 import { DialogActions, DialogContent } from "@mui/material";
 import { Box } from "@mui/system";
-import { POSButton, POSDialog, POSDialogTitle, POSTextField } from "common/components";
+import { POSButton, POSDialog, POSDialogHeader, POSTextField } from "common/components";
 import { useAxios } from "common/custom-hooks";
 import { Area, areaEmpty } from "common/models";
 import { useFormik } from "formik";
@@ -62,7 +62,7 @@ const AreaDialog: React.FC<AreaDialogProps> = () => {
 
   return (
     <POSDialog open={isOpenDialog}>
-      <POSDialogTitle titleDialog={titleDialog} setIsOpenDialog={setIsOpenDialog} />
+      <POSDialogHeader titleDialog={titleDialog} setIsOpenDialog={setIsOpenDialog} />
       <Box component="form" onSubmit={formik.handleSubmit}>
         <DialogContent>
           <POSTextField keyFormik="code" label="Código" formik={formik} />

@@ -1,7 +1,7 @@
 import SaveIcon from "@mui/icons-material/Save";
 import { DialogActions, DialogContent } from "@mui/material";
 import { Box } from "@mui/system";
-import { POSButton, POSDialog, POSDialogTitle, POSSelect, POSTextField } from "common/components";
+import { POSButton, POSDialog, POSDialogHeader, POSSelect, POSTextField } from "common/components";
 import { emailRegex } from "common/consts";
 import { useAxios } from "common/custom-hooks";
 import { SelectDTO } from "common/dtos";
@@ -79,7 +79,7 @@ const SupplierDialog: React.FC<SupplierDialogProps> = () => {
 
   return (
     <POSDialog open={isOpenDialog}>
-      <POSDialogTitle titleDialog={titleDialog} setIsOpenDialog={setIsOpenDialog} />
+      <POSDialogHeader titleDialog={titleDialog} setIsOpenDialog={setIsOpenDialog} />
       <Box component="form" onSubmit={formik.handleSubmit}>
         <DialogContent>
           <POSSelect keyFormik="brandId" label="Marcas" formik={formik} datas={brands} />

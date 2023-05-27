@@ -1,6 +1,6 @@
 import SaveIcon from "@mui/icons-material/Save";
 import { Box, DialogActions, DialogContent } from "@mui/material";
-import { POSButton, POSDialog, POSDialogTitle, POSSelect, POSTextField } from "common/components";
+import { POSButton, POSDialog, POSDialogHeader, POSSelect, POSTextField } from "common/components";
 import { useAxios } from "common/custom-hooks";
 import { SelectDTO } from "common/dtos";
 import { Employee, employeeEmpty } from "common/models";
@@ -73,7 +73,7 @@ const EmployeeDialog: React.FC<EmployeeDialogProps> = () => {
 
   return (
     <POSDialog open={isOpenDialog}>
-      <POSDialogTitle titleDialog={titleDialog} setIsOpenDialog={setIsOpenDialog} />
+      <POSDialogHeader titleDialog={titleDialog} setIsOpenDialog={setIsOpenDialog} />
       <Box component="form" onSubmit={formik.handleSubmit}>
         <DialogContent>
           <POSTextField keyFormik="name" label="Nombre" formik={formik} />

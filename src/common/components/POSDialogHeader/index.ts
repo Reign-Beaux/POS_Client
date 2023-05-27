@@ -1,0 +1,1 @@
+export { default as POSDialogHeader } from './POSDialogHeader';

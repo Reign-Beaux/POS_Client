@@ -2,10 +2,9 @@ import { POSReducer } from "@/redux";
 import { parseJwt } from "@/utilities";
 import SaveIcon from "@mui/icons-material/Save";
 import { Box, DialogActions, DialogContent } from "@mui/material";
-import { POSButton, POSDialog, POSDialogTitle, POSSelect } from "common/components";
+import { POSButton, POSDialog, POSDialogHeader, POSSelect } from "common/components";
 import { useAxios } from "common/custom-hooks";
 import { PurchaseRequestDTO, SelectDTO, purchaseRequestDTOEmpty } from "common/dtos";
-import { Purchase } from "common/models/purchase";
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -83,7 +82,7 @@ const PurchasingProcessDialog: React.FC<PurchasingProcessDialogProps> = () => {
 
   return (
     <POSDialog open={isOpenDialog}>
-      <POSDialogTitle titleDialog={titleDialog} setIsOpenDialog={setIsOpenDialog} />
+			<POSDialogHeader titleDialog={titleDialog} setIsOpenDialog={setIsOpenDialog} />
       <Box component="form" onSubmit={formik.handleSubmit}>
         <DialogContent>
           <POSSelect keyFormik="supplierId" label="Proveedor" formik={formik} datas={suppliers} />
