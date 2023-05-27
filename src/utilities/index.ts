@@ -1,2 +1,2 @@
 export * from './fetchConfig';
-export * from './parseJwt';
+export { default as parseJwt } from './parseJwt';
