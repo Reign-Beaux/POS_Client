@@ -1,10 +1,10 @@
+import { EmployeeDTO } from "common/dtos";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { IconButton, Tooltip } from "@mui/material";
 import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import { POSDataGrid } from "common/components";
 import { useAxios, useDialogConfirm } from "common/custom-hooks";
-import { Employee } from "common/models";
 import React, { useEffect, useState } from "react";
 import { useEmployeesContext } from "../../context";
 
@@ -21,10 +21,10 @@ const EmployeesDataGrid: React.FC<EmployeesDataGridProps> = () => {
   } = useEmployeesContext();
   const { getAll, remove } = useAxios("Employees");
   const { showDialogConfirm, resetResponse, response } = useDialogConfirm();
-  const [employees, setEmployees] = useState<Employee[]>([]);
+  const [employees, setEmployees] = useState<EmployeeDTO[]>([]);
 
   const getEmployees = async () => {
-    const result = await getAll<Employee>();
+    const result = await getAll<EmployeeDTO>();
     setEmployees(result);
     setIsGridLoading(false);
   };
@@ -125,6 +125,7 @@ const EmployeesDataGrid: React.FC<EmployeesDataGridProps> = () => {
     handleRemove();
     resetResponse();
   }, [response]);
+  
   return <POSDataGrid dataSource={employees} columns={columns} />;
 };
 

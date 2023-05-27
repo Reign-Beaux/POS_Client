@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
 export const FeatureContainer = styled("div")`
-  width: 100%;
+  width: calc(100vw - 288px);
   height: calc(100vh - 115px);
 `;

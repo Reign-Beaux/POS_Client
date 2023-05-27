@@ -1,4 +1,3 @@
-import { emailRegex } from "@/common/consts";
 import SaveIcon from "@mui/icons-material/Save";
 import { Box, DialogActions, DialogContent } from "@mui/material";
 import {
@@ -9,6 +8,7 @@ import {
   POSSelect,
   POSTextField,
 } from "common/components";
+import { emailRegex } from "common/consts";
 import { useAxios } from "common/custom-hooks";
 import { SelectDTO } from "common/dtos";
 import { User, userEmpty } from "common/models";
@@ -22,7 +22,7 @@ export type UserDialogProps = {};
 interface FormValues extends User {
   passwordConfirm: string;
 }
-const initialValues: FormValues = { ...userEmpty, ...{ passwordConfirm: "" } };
+const initialValues: FormValues = { ...userEmpty, passwordConfirm: "" };
 
 const UserDialog: React.FC<UserDialogProps> = () => {
   const {
@@ -103,16 +103,6 @@ const UserDialog: React.FC<UserDialogProps> = () => {
     const response = await getAll<SelectDTO>("GetRoles");
     setRoles(response);
   };
-
-  // const execValidation = () => {
-  //   const fieldKeys = Object.keys(formik.values);
-  //   const touchedFields = fieldKeys.reduce((acc: any, fieldKey) => {
-  //     acc[fieldKey] = true;
-  //     return acc;
-  //   }, {});
-  //   debugger;
-  //   formik.setTouched({passwordConfirm: true});
-  // }
 
   useEffect(() => {
     if (!isOpenDialog) {

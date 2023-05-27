@@ -1,9 +1,8 @@
 import { POSTabs } from "common/components";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
-import "./System.css";
 import { Areas, Employess, Roles, Users } from "./components";
-import { POSTabPanel } from "@/common/components/POSTabPanel";
+import { POSTabPanel } from "common/components/POSTabPanel";
 export interface SystemProps {}
 
 const System: React.FC<SystemProps> = () => {

@@ -8,8 +8,10 @@ import { setConfig } from "./redux/slices";
 import { router } from "./router";
 import { getTheme } from "./themes";
 import { fetchConfig } from "./utilities";
+import { useAxiosInterceptor } from "./common/custom-hooks";
 
 function App() {
+  useAxiosInterceptor();
   const dispatcher = useDispatch();
   const { isDarkMode } = useSelector((store: POSReducer) => store.theme);
   const { API_URL } = useSelector((store: POSReducer) => store.config);

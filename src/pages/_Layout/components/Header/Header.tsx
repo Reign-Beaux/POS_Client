@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AppBar } from "./styled-components";
+import { parseJwt } from "@/utilities";
 export interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = () => {
@@ -29,21 +30,6 @@ const Header: React.FC<HeaderProps> = () => {
     const userClaim = parseJwt(token);
     setUserName(userClaim.FullName)
   }, []);
-
-  function parseJwt(token: string) {
-    var base64Url = token.split(".")[1];
-    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-    var jsonPayload = decodeURIComponent(
-      window
-        .atob(base64)
-        .split("")
-        .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
-        .join("")
-    );
-
-    const payload = JSON.parse(jsonPayload);
-    return JSON.parse(payload.USER_CLAIM);
-  }
 
   return (
     <AppBar position="fixed" open={true}>

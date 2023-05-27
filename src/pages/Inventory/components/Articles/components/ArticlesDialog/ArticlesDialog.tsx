@@ -5,17 +5,17 @@ import {
   POSDialogTitle,
   POSSelect,
   POSTextField,
-} from "@/common/components";
-import { useAxios } from "@/common/custom-hooks";
-import { Article, articleEmpty } from "@/common/models";
+} from "common/components";
+import { useAxios } from "common/custom-hooks";
+import { Article, articleEmpty } from "common/models";
 import SaveIcon from "@mui/icons-material/Save";
 import { DialogActions, DialogContent } from "@mui/material";
 import { Box } from "@mui/system";
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
-import { SelectDTO } from "../../../../../../common/dtos/selectDTO";
 import { useArticlesContext } from "../../context";
+import { SelectDTO } from "common/dtos";
 
 export type ArticlesDialogProps = {};
 

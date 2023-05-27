@@ -1,6 +1,6 @@
-import { POSDataGrid } from "@/common/components";
-import { useAxios } from "@/common/custom-hooks";
-import { InventoryDTO } from "@/common/dtos";
+import { POSDataGrid } from "common/components";
+import { useAxios } from "common/custom-hooks";
+import { InventoryDTO } from "common/dtos";
 import { GridColDef } from "@mui/x-data-grid";
 import React, { useEffect, useState } from "react";
 
