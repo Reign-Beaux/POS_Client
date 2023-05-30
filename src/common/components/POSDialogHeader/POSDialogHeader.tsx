@@ -16,9 +16,9 @@ const POSDialogHeader: React.FC<POSDialogHeaderProps> = ({ titleDialog, setIsOpe
             {titleDialog}
           </Typography>
         </div>
-        <div style={{ flex: "50%", textAlign: "end" }}>
+        <div style={{ flex: "50%", textAlign: "end", color: "white" }}>
           <Tooltip title="Cerrar">
-            <IconButton aria-label="logOut" onClick={() => setIsOpenDialog(false)}>
+            <IconButton aria-label="logOut" onClick={() => setIsOpenDialog(false)} style={{ color: "white" }} >
               <CloseIcon />
             </IconButton>
           </Tooltip>
