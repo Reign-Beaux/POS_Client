@@ -4,7 +4,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { AlertColors, SnackMessage } from "../consts";
-import { LoginDTO } from "../dtos";
+import { LoginDTO, SelectDTO } from "../dtos";
 import { POSTransactionResult } from "../models";
 import useSnackbar from "./useSnackbar";
 
@@ -99,6 +99,17 @@ const useAxios = (controller: string) => {
     }
   };
 
+  const selects = async (endpoint: string): Promise<SelectDTO[]> => {
+    try {
+      const response: AxiosResponse<SelectDTO[]> = await axios.get(`${API_URL}/Selects/${endpoint}`);
+      return response.data;
+    } catch (error: any) {
+      const message = error?.response?.data ?? error.message;
+      showSnackbar(message, AlertColors.ERROR);
+      return {} as SelectDTO[];
+    }
+  };
+
   useEffect(() => {
     return () => abortController.abort();
   }, []);
@@ -110,6 +121,7 @@ const useAxios = (controller: string) => {
     update,
     remove,
     login,
+    selects,
   };
 };
 
