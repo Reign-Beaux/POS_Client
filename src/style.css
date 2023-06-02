@@ -2,6 +2,10 @@ body {
   margin: 0px;
 }
 
+#pos-form-select-datagrid .MuiFormLabel-filled {
+  display: none;
+}
+
 /* Estilos para el scroll vertical */
 ::-webkit-scrollbar {
   width: 10px; /* Ancho del scroll */

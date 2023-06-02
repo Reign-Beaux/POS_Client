@@ -1,6 +1,3 @@
-import { POSDarkModeButton, POSLink, POSPassField, POSTextField } from "common/components";
-import { useAxios } from "common/custom-hooks";
-import { LoginDTO, loginDTOEmpty } from "common/dtos";
 import { logoutSession, setSession } from "@/redux/slices";
 import {
   Box,
@@ -11,6 +8,9 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import { POSDarkModeButton, POSLink, POSPassField, POSTextField } from "common/components";
+import { useAxios } from "common/custom-hooks";
+import { LoginDTO, loginDTOEmpty } from "common/dtos";
 import { useFormik } from "formik";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -48,8 +48,7 @@ const Login: React.FC<LoginProps> = () => {
 
   useEffect(() => {
     dispatcher(logoutSession());
-    console.log(formik);
-  }, [])
+  }, []);
 
   return (
     <div className="container">
@@ -63,8 +62,7 @@ const Login: React.FC<LoginProps> = () => {
             variant="h3"
             color="text.primary"
             gutterBottom
-            style={{ textAlign: "center" }}
-          >
+            style={{ textAlign: "center" }}>
             Iniciar Sesión
           </Typography>
 
@@ -80,8 +78,7 @@ const Login: React.FC<LoginProps> = () => {
               type="submit"
               fullWidth
               style={{ marginTop: "50px" }}
-              disabled={formik.isSubmitting}
-            >
+              disabled={formik.isSubmitting}>
               {formik.isSubmitting ? <CircularProgress size={24} /> : "Iniciar Sesión"}
             </Button>
           </Box>
