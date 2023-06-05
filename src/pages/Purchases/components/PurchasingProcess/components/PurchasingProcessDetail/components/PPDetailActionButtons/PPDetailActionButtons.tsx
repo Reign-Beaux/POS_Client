@@ -11,7 +11,6 @@ const PPDetailActionButtons: React.FC<PPDetailActionButtonsProps> = () => {
   const handleAddPurchaseDetail = () => {
     let newRecord = {...purchaseDetailEmpty};
     newRecord.record = purchaseDetail.length + 1;
-    newRecord.price = 25;
     setPurchaseDetail([...purchaseDetail, newRecord]);
   }
 

@@ -48,6 +48,28 @@ const PPDetailDataGrid: React.FC<PPDetailDataGridProps> = () => {
     setPurchaseDetail(newPurchaseDetail);
   };
 
+  const handleChangePrice = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    detail: PurchaseDetail
+  ) => {
+    const price = parseFloat(event.target.value === "" ? "0" : event.target.value);
+    const subtotal = detail.quantitySold * price;
+    const iva = subtotal * Taxes.IVA;
+    const total = subtotal + iva;
+
+    const currentDetail = {
+      ...detail,
+      price: price,
+      subtotal: subtotal,
+      taxes: iva,
+      total: total,
+    };
+    const index = purchaseDetail.findIndex((x) => x.record === detail.record);
+    let newPurchaseDetail = [...purchaseDetail];
+    newPurchaseDetail[index] = currentDetail;
+    setPurchaseDetail(newPurchaseDetail);
+  };
+
   const getArticles = async () => {
     const result = await selects("GetArticles");
     const defaultSelect: SelectDTO[] = [{ value: 0, text: "Seleccionar artículo" }];
@@ -74,6 +96,7 @@ const PPDetailDataGrid: React.FC<PPDetailDataGridProps> = () => {
       sortable: false,
       renderCell: (params: GridRenderCellParams) => (
         <POSSelectToDataGrid
+          key={"articleId"}
           placeholder="Seleccione artículo"
           datas={articles}
           value={params.row.articleId}
@@ -89,10 +112,12 @@ const PPDetailDataGrid: React.FC<PPDetailDataGridProps> = () => {
       editable: false,
       renderCell: (params: GridRenderCellParams) => (
         <TextField
+          key={"quantitySold"}
           value={params.row.quantitySold}
           onChange={(event) => handleChangeQuantitySold(event, params.row)}
           variant="standard"
           type="number"
+          fullWidth
           // InputProps={{
           //   endAdornment: (
           //     <InputAdornment position="end" style={{ marginBottom: "10px" }}>
@@ -114,7 +139,16 @@ const PPDetailDataGrid: React.FC<PPDetailDataGridProps> = () => {
       flex: 1,
       minWidth: 150,
       editable: false,
-      align: "right",
+      renderCell: (params: GridRenderCellParams) => (
+        <TextField
+          key={"price"}
+          value={params.row.price}
+          onChange={(event) => handleChangePrice(event, params.row)}
+          variant="standard"
+          type="number"
+          fullWidth
+        />
+      ),
     },
     {
       field: "subtotal",
