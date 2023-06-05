@@ -7,6 +7,8 @@ type PurchasingProcessProviderProps = {
 type ContextProps = {
   isOpenDialog: boolean;
   setIsOpenDialog: Function;
+  isOpenDialogDetail: boolean;
+  setIsOpenDialogDetail: Function;
   titleDialog: string;
   setTitleDialog: Function;
   isGridLoading: boolean;
@@ -18,6 +20,8 @@ type ContextProps = {
 const ContextEmptyState: ContextProps = {
   isOpenDialog: false,
   setIsOpenDialog: () => {},
+  isOpenDialogDetail: false,
+  setIsOpenDialogDetail: () => {},
   titleDialog: "",
   setTitleDialog: () => {},
   isGridLoading: true,
@@ -30,6 +34,7 @@ const PurchasingProcessContext: Context<ContextProps> = createContext(ContextEmp
 
 export const PurchasingProcessProvider: React.FC<PurchasingProcessProviderProps> = ({ children }) => {
   const [isOpenDialog, setIsOpenDialog] = useState<boolean>(false);
+  const [isOpenDialogDetail, setIsOpenDialogDetail] = useState<boolean>(false);
   const [titleDialog, setTitleDialog] = useState<string>("");
   const [isGridLoading, setIsGridLoading] = useState<boolean>(true);
   const [idSelected, setIdSelected] = useState<number>(0);
@@ -39,6 +44,8 @@ export const PurchasingProcessProvider: React.FC<PurchasingProcessProviderProps>
       value={{
         isOpenDialog: isOpenDialog,
         setIsOpenDialog: setIsOpenDialog,
+        isOpenDialogDetail: isOpenDialogDetail,
+        setIsOpenDialogDetail: setIsOpenDialogDetail,
         titleDialog: titleDialog,
         setTitleDialog: setTitleDialog,
         isGridLoading: isGridLoading,
@@ -55,7 +62,8 @@ export const PurchasingProcessProvider: React.FC<PurchasingProcessProviderProps>
 export const usePurchasingProcessContext = () => {
   const context = useContext(PurchasingProcessContext);
 
-  if (!context) throw Error("This component is not found inside PurchasingProcessContext");
+  if (!context)
+    throw Error("This component is not found inside PurchasingProcessContext");
 
   return context;
 };

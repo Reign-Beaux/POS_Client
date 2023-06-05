@@ -11,7 +11,6 @@ export interface POSDataGridProps {
 const POSDataGrid: React.FC<POSDataGridProps> = ({ dataSource, columns }) => {
   const theme = useTheme();
   const pageSizeOptions = [5, 10, 50];
-
   return (
     <StyleDataGrid
       rows={dataSource}
@@ -28,7 +27,7 @@ const POSDataGrid: React.FC<POSDataGridProps> = ({ dataSource, columns }) => {
       autoHeight
       showColumnVerticalBorder
       showCellVerticalBorder
-      getRowId={(row: any) => row.id}
+      getRowId={(row: any) => row.id === 0 ? row.record : row.id}
       localeText={{
         noRowsLabel: "No se ha encontrado ningún registro",
         MuiTablePagination: {

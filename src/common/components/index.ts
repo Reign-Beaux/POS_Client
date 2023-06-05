@@ -10,6 +10,7 @@ export * from './POSIconButton';
 export * from './POSLink';
 export * from './POSPassField';
 export * from './POSSelect';
+export * from './POSSelectToDataGrid';
 export * from './POSSnackbar';
 export * from './POSTabPanel';
 export * from './POSTabs';

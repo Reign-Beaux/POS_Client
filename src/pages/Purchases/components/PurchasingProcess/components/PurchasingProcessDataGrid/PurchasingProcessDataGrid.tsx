@@ -1,19 +1,20 @@
-import { PurchaseDTO } from 'common/dtos';
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import React, { useEffect, useState } from 'react';
-import { usePurchasingProcessContext } from '../../context';
-import { POSDataGrid } from 'common/components';
-import { useAxios, useDialogConfirm } from 'common/custom-hooks';
-import { Tooltip, IconButton } from '@mui/material';
-import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
+import PostAddIcon from "@mui/icons-material/PostAdd";
+import { IconButton, Tooltip } from "@mui/material";
+import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
+import { POSDataGrid } from "common/components";
+import { useAxios, useDialogConfirm } from "common/custom-hooks";
+import { PurchaseDTO } from "common/dtos";
+import React, { useEffect, useState } from "react";
+import { usePurchasingProcessContext } from "../../context";
 
-export type PurchasingProcessDataGridProps = {
-}
+export type PurchasingProcessDataGridProps = {};
 
 const PurchasingProcessDataGrid: React.FC<PurchasingProcessDataGridProps> = () => {
   const {
     setIsOpenDialog,
+    setIsOpenDialogDetail,
     setTitleDialog,
     isGridLoading,
     setIsGridLoading,
@@ -22,7 +23,7 @@ const PurchasingProcessDataGrid: React.FC<PurchasingProcessDataGridProps> = () =
   } = usePurchasingProcessContext();
   const { getAll, remove } = useAxios("Purchases");
   const { showDialogConfirm, resetResponse, response } = useDialogConfirm();
-  const [Purchases, setPurchases] = useState<PurchaseDTO[]>([]);
+  const [purchases, setPurchases] = useState<PurchaseDTO[]>([]);
 
   const getPurchases = async () => {
     const result = await getAll<PurchaseDTO>();
@@ -47,6 +48,10 @@ const PurchasingProcessDataGrid: React.FC<PurchasingProcessDataGridProps> = () =
   const handleShowConfirmDialog = (id: number) => {
     setIdSelected(id);
     showDialogConfirm("¿Desea eliminar el registro?");
+  };
+
+  const handleShowDialogDetail = () => {
+    setIsOpenDialogDetail(true);
   };
 
   const columns: GridColDef[] = [
@@ -99,16 +104,19 @@ const PurchasingProcessDataGrid: React.FC<PurchasingProcessDataGridProps> = () =
           <Tooltip title="Actualizar compra">
             <IconButton
               aria-label="update-student"
-              onClick={() => handleShowDialogToUpdate(params.row.id)}
-            >
+              onClick={() => handleShowDialogToUpdate(params.row.id)}>
               <EditIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Detalle de compra">
+            <IconButton aria-label="delete-subject" onClick={() => handleShowDialogDetail()}>
+              <PostAddIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="Eliminar compra">
             <IconButton
               aria-label="delete-subject"
-              onClick={() => handleShowConfirmDialog(params.row.id)}
-            >
+              onClick={() => handleShowConfirmDialog(params.row.id)}>
               <DeleteIcon />
             </IconButton>
           </Tooltip>
@@ -133,8 +141,8 @@ const PurchasingProcessDataGrid: React.FC<PurchasingProcessDataGridProps> = () =
     handleRemove();
     resetResponse();
   }, [response]);
-  
-  return <POSDataGrid dataSource={Purchases} columns={columns} />;
+
+  return <POSDataGrid dataSource={purchases} columns={columns} />;
 };
 
 export default PurchasingProcessDataGrid;
