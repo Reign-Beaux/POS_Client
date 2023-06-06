@@ -21,9 +21,8 @@ const PPDetailDataGrid: React.FC<PPDetailDataGridProps> = () => {
   const handleChangeArticle = (event: SelectChangeEvent<unknown>, detail: PurchaseDetail) => {
     const newArticleId = parseInt(event.target.value as string);
     const newPurchaseDetail = purchaseDetail.map((purchase) => {
-      if (purchase.record === detail.record) {
-        return { ...purchase, articleId: newArticleId };
-      }
+      if (purchase.record === detail.record) return { ...purchase, articleId: newArticleId };
+
       return purchase;
     });
     setPurchaseDetail(newPurchaseDetail);
@@ -129,18 +128,6 @@ const PPDetailDataGrid: React.FC<PPDetailDataGridProps> = () => {
           variant="standard"
           type="number"
           fullWidth
-          // InputProps={{
-          //   endAdornment: (
-          //     <InputAdornment position="end" style={{ marginBottom: "10px" }}>
-          //       <IconButton
-          //         aria-label="toggle password visibility"
-          //         // onClick={handleClickShowPassword}
-          //         edge="end">
-          //         <CloseIcon />
-          //       </IconButton>
-          //     </InputAdornment>
-          //   ),
-          // }}
         />
       ),
     },
