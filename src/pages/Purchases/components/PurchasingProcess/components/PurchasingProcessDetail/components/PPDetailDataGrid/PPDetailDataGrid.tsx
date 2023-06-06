@@ -1,8 +1,8 @@
+import { calculateValues } from "@/common/utilities";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { IconButton, SelectChangeEvent, TextField, Tooltip } from "@mui/material";
 import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import { POSDataGrid, POSSelectToDataGrid } from "common/components";
-import { Taxes } from "common/consts";
 import { useAxios, useDialogConfirm } from "common/custom-hooks";
 import { PurchaseDTO, SelectDTO } from "common/dtos";
 import { PurchaseDetail } from "common/models";
@@ -26,18 +26,6 @@ const PPDetailDataGrid: React.FC<PPDetailDataGridProps> = () => {
       return purchase;
     });
     setPurchaseDetail(newPurchaseDetail);
-  };
-
-  const calculateValues = (quantitySold: number, price: number) => {
-    const subtotal = quantitySold * price;
-    const iva = subtotal * Taxes.IVA;
-    const total = subtotal + iva;
-
-    return {
-      subtotal,
-      taxes: iva,
-      total,
-    };
   };
 
   const handleInputChange = (
