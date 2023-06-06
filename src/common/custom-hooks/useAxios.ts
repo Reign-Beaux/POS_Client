@@ -8,7 +8,7 @@ import { LoginDTO, SelectDTO } from "../dtos";
 import { POSTransactionResult } from "../models";
 import useSnackbar from "./useSnackbar";
 
-const useAxios = (controller: string) => {
+const useAxios = (controller: string = "") => {
   const { API_URL } = useSelector((store: POSReducer) => store.config);
   const { showSnackbar } = useSnackbar();
   const [abortController, setAbortController] = useState<AbortController>(new AbortController());
