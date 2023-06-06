@@ -1,8 +1,8 @@
-import { Taxes, numericRegex } from "@/common/consts";
-import CloseIcon from "@mui/icons-material/Close";
-import { IconButton, InputAdornment, SelectChangeEvent, TextField } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { IconButton, SelectChangeEvent, TextField, Tooltip } from "@mui/material";
 import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import { POSDataGrid, POSSelectToDataGrid } from "common/components";
+import { Taxes } from "common/consts";
 import { useAxios, useDialogConfirm } from "common/custom-hooks";
 import { PurchaseDTO, SelectDTO } from "common/dtos";
 import { PurchaseDetail } from "common/models";
@@ -70,6 +70,16 @@ const PPDetailDataGrid: React.FC<PPDetailDataGridProps> = () => {
     setPurchaseDetail(newPurchaseDetail);
   };
 
+  const handleRemove = (record: number) => {
+    const index = purchaseDetail.findIndex((x) => x.record === record);
+    let newPurchaseDetail = [...purchaseDetail];
+    newPurchaseDetail.splice(index, 1);
+    newPurchaseDetail
+      .sort((a, b) => a.record - b.record)
+      .forEach((x, index) => (x.record = index + 1));
+    setPurchaseDetail(newPurchaseDetail);
+  };
+
   const getArticles = async () => {
     const result = await selects("GetArticles");
     const defaultSelect: SelectDTO[] = [{ value: 0, text: "Seleccionar artículo" }];
@@ -97,7 +107,6 @@ const PPDetailDataGrid: React.FC<PPDetailDataGridProps> = () => {
       renderCell: (params: GridRenderCellParams) => (
         <POSSelectToDataGrid
           key={"articleId"}
-          placeholder="Seleccione artículo"
           datas={articles}
           value={params.row.articleId}
           onChange={(event) => handleChangeArticle(event, params.row)}
@@ -184,12 +193,11 @@ const PPDetailDataGrid: React.FC<PPDetailDataGridProps> = () => {
       disableColumnMenu: true,
       sortable: false,
       renderCell: (params: GridRenderCellParams) => (
-        <></>
-        // <Tooltip title="Eliminar compra">
-        //   <IconButton aria-label="delete-subject" onClick={() => handleRemove(params.row.id)}>
-        //     <DeleteIcon />
-        //   </IconButton>
-        // </Tooltip>
+        <Tooltip title="Eliminar compra">
+          <IconButton aria-label="delete-subject" onClick={() => handleRemove(params.row.record)}>
+            <DeleteIcon />
+          </IconButton>
+        </Tooltip>
       ),
     },
   ];
