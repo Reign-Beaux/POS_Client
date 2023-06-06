@@ -19,65 +19,67 @@ const PPDetailDataGrid: React.FC<PPDetailDataGridProps> = () => {
   const [articles, setArticles] = useState<SelectDTO[]>([]);
 
   const handleChangeArticle = (event: SelectChangeEvent<unknown>, detail: PurchaseDetail) => {
-    const currentDetail = { ...detail, articleId: parseInt(event.target.value as string) };
+    const newArticleId = parseInt(event.target.value as string);
+    const newPurchaseDetail = purchaseDetail.map((purchase) => {
+      if (purchase.record === detail.record) {
+        return { ...purchase, articleId: newArticleId };
+      }
+      return purchase;
+    });
+    setPurchaseDetail(newPurchaseDetail);
+  };
+
+  const calculateValues = (quantitySold: number, price: number) => {
+    const subtotal = quantitySold * price;
+    const iva = subtotal * Taxes.IVA;
+    const total = subtotal + iva;
+
+    return {
+      subtotal,
+      taxes: iva,
+      total,
+    };
+  };
+
+  const handleInputChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    detail: PurchaseDetail,
+    field: string
+  ) => {
+    const value = parseFloat(event.target.value === "" ? "0" : event.target.value);
+    const { quantitySold, price } = detail;
+
+    const updatedDetail = {
+      ...detail,
+      [field]: value,
+      ...calculateValues(
+        field === "quantitySold" ? value : quantitySold,
+        field === "price" ? value : price
+      ),
+    };
+
     const index = purchaseDetail.findIndex((x) => x.record === detail.record);
-    let newPurchaseDetail = [...purchaseDetail];
-    newPurchaseDetail[index] = currentDetail;
+    const newPurchaseDetail = [...purchaseDetail];
+    newPurchaseDetail[index] = updatedDetail;
     setPurchaseDetail(newPurchaseDetail);
   };
 
   const handleChangeQuantitySold = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     detail: PurchaseDetail
-  ) => {
-    const quantitySold = parseFloat(event.target.value === "" ? "0" : event.target.value);
-    const subtotal = quantitySold * detail.price;
-    const iva = subtotal * Taxes.IVA;
-    const total = subtotal + iva;
-
-    const currentDetail = {
-      ...detail,
-      quantitySold: quantitySold,
-      subtotal: subtotal,
-      taxes: iva,
-      total: total,
-    };
-    const index = purchaseDetail.findIndex((x) => x.record === detail.record);
-    let newPurchaseDetail = [...purchaseDetail];
-    newPurchaseDetail[index] = currentDetail;
-    setPurchaseDetail(newPurchaseDetail);
-  };
+  ) => handleInputChange(event, detail, "quantitySold");
 
   const handleChangePrice = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     detail: PurchaseDetail
-  ) => {
-    const price = parseFloat(event.target.value === "" ? "0" : event.target.value);
-    const subtotal = detail.quantitySold * price;
-    const iva = subtotal * Taxes.IVA;
-    const total = subtotal + iva;
-
-    const currentDetail = {
-      ...detail,
-      price: price,
-      subtotal: subtotal,
-      taxes: iva,
-      total: total,
-    };
-    const index = purchaseDetail.findIndex((x) => x.record === detail.record);
-    let newPurchaseDetail = [...purchaseDetail];
-    newPurchaseDetail[index] = currentDetail;
-    setPurchaseDetail(newPurchaseDetail);
-  };
+  ) => handleInputChange(event, detail, "price");
 
   const handleRemove = (record: number) => {
-    const index = purchaseDetail.findIndex((x) => x.record === record);
-    let newPurchaseDetail = [...purchaseDetail];
-    newPurchaseDetail.splice(index, 1);
-    newPurchaseDetail
-      .sort((a, b) => a.record - b.record)
-      .forEach((x, index) => (x.record = index + 1));
-    setPurchaseDetail(newPurchaseDetail);
+    const newPurchaseDetail = purchaseDetail
+      .filter((x) => x.record !== record)
+      .map((x, index) => ({ ...x, record: index + 1 }));
+
+    setPurchaseDetail([...newPurchaseDetail]);
   };
 
   const getArticles = async () => {
