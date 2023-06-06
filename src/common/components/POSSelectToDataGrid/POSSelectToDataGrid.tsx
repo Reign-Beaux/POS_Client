@@ -1,5 +1,5 @@
-import { SelectDTO } from "@/common/dtos";
-import { FormControl, InputLabel, Select, MenuItem, SelectProps } from "@mui/material";
+import { MenuItem, Select, SelectProps } from "@mui/material";
+import { SelectDTO } from "common/dtos";
 import React from "react";
 
 export interface POSSelectToDataGridProps extends SelectProps {
