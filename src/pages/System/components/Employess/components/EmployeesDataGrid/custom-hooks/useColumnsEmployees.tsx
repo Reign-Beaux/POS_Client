@@ -1,21 +1,21 @@
+import { Tooltip, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { IconButton, Tooltip } from "@mui/material";
 import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
-import { useAreaContext } from "../../../context";
-import { useDialogConfirm } from "common/custom-hooks";
+import { useEmployeesContext } from "../../../context";
+import { useDialogConfirm } from "@/common/custom-hooks";
 
-const useColumnsArea = () => {
+const useColumnsEmployees = () => {
   const {
     setIsOpenDialog,
     setTitleDialog,
     setIdSelected,
-  } = useAreaContext();
+  } = useEmployeesContext();
   const { showDialogConfirm } = useDialogConfirm();
 
   const handleShowDialogToUpdate = (id: number) => {
     setIdSelected(id);
-    setTitleDialog("Actualizar área");
+    setTitleDialog("Actualizar empleado");
     setIsOpenDialog(true);
   };
 
@@ -27,15 +27,29 @@ const useColumnsArea = () => {
   const columns = (): GridColDef[] => {
     return [
       {
-        field: "code",
-        headerName: "Código",
+        field: "name",
+        headerName: "Nombre(s)",
         flex: 1,
         minWidth: 150,
         editable: false,
       },
       {
-        field: "description",
-        headerName: "Descripción",
+        field: "paternalSurname",
+        headerName: "Apellido Paterno",
+        flex: 1,
+        minWidth: 150,
+        editable: false,
+      },
+      {
+        field: "maternalSurname",
+        headerName: "Apellido Materno",
+        flex: 1,
+        minWidth: 150,
+        editable: false,
+      },
+      {
+        field: "areaDescription",
+        headerName: "Área",
         flex: 1,
         minWidth: 150,
         editable: false,
@@ -51,19 +65,17 @@ const useColumnsArea = () => {
         sortable: false,
         renderCell: (params: GridRenderCellParams) => (
           <>
-            <Tooltip title="Actualizar área">
+            <Tooltip title="Actualizar empleado">
               <IconButton
                 aria-label="update-student"
-                onClick={() => handleShowDialogToUpdate(params.row.id)}
-              >
+                onClick={() => handleShowDialogToUpdate(params.row.id)}>
                 <EditIcon />
               </IconButton>
             </Tooltip>
-            <Tooltip title="Eliminar área">
+            <Tooltip title="Eliminar empleado">
               <IconButton
                 aria-label="delete-subject"
-                onClick={() => handleShowConfirmDialog(params.row.id)}
-              >
+                onClick={() => handleShowConfirmDialog(params.row.id)}>
                 <DeleteIcon />
               </IconButton>
             </Tooltip>
@@ -71,9 +83,9 @@ const useColumnsArea = () => {
         ),
       },
     ];
-  }
+  };
 
   return { columns };
-}
+};
 
-export default useColumnsArea;
+export default useColumnsEmployees;
