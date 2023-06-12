@@ -31,7 +31,7 @@ const routes: RouteObject[] = [
   },
   {
     path: "/purchaseDetail/:id",
-    element: <ProtectedRoute element={<PurchaseDetail />} path="/purchasesDetail" />,
+    element: <ProtectedRoute element={<PurchaseDetail />} path="/purchaseDetail" />,
   },
   {
     path: "/login",
