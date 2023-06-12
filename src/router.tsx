@@ -1,6 +1,6 @@
 import { Navigate, RouteObject, createBrowserRouter } from "react-router-dom";
 import { ProtectedRoute } from "./components";
-import { Home, Inventory, Layout, Login, Purchases, Sales, System } from "./pages";
+import { Home, Inventory, Layout, Login, PurchaseDetail, Purchases, Sales, System } from "./pages";
 
 const routes: RouteObject[] = [
   {
@@ -30,6 +30,10 @@ const routes: RouteObject[] = [
     ],
   },
   {
+    path: "/purchaseDetail/:id",
+    element: <ProtectedRoute element={<PurchaseDetail />} path="/purchasesDetail" />,
+  },
+  {
     path: "/login",
     element: <Login />,
   },
@@ -42,4 +46,3 @@ const routes: RouteObject[] = [
 const router = createBrowserRouter(routes);
 
 export { router };
-
