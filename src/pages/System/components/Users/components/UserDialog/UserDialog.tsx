@@ -34,7 +34,7 @@ const UserDialog: React.FC<UserDialogProps> = () => {
     setIdSelected,
   } = useUserContext();
   const { post, update, getById } = useAxios("Users");
-  const { getAll } = useAxios("Selects");
+  const { selects } = useAxios();
   const [employees, setEmployees] = useState<SelectDTO[]>([]);
   const [roles, setRoles] = useState<SelectDTO[]>([]);
   const [isOpening, setIsOpening] = useState<boolean>(true);
@@ -95,12 +95,12 @@ const UserDialog: React.FC<UserDialogProps> = () => {
   };
 
   const getEmployees = async () => {
-    const response = await getAll<SelectDTO>("GetEmployees");
+    const response = await selects("GetEmployees");
     setEmployees(response);
   };
 
   const getRoles = async () => {
-    const response = await getAll<SelectDTO>("GetRoles");
+    const response = await selects("GetRoles");
     setRoles(response);
   };
 

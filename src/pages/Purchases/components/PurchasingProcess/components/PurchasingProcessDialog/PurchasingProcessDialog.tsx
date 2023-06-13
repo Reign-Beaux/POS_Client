@@ -29,7 +29,7 @@ const PurchasingProcessDialog: React.FC<PurchasingProcessDialogProps> = () => {
   } = usePurchasingProcessContext();
   const { token } = useSelector((store: POSReducer) => store.session);
   const { post, update, getById } = useAxios("Purchases");
-  const { getAll } = useAxios("Selects");
+  const { selects } = useAxios();
   const [suppliers, setSuppliers] = useState<SelectDTO[]>([]);
   const [userName, setUserName] = useState<string>("");
 
@@ -59,7 +59,7 @@ const PurchasingProcessDialog: React.FC<PurchasingProcessDialogProps> = () => {
   };
 
   const getSuppliers = async () => {
-    const response = await getAll<SelectDTO>("GetSuppliers");
+    const response = await selects("GetSuppliers");
     setSuppliers(response);
   };
 

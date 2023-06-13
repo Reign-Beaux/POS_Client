@@ -26,7 +26,7 @@ const SupplierDialog: React.FC<SupplierDialogProps> = () => {
     setIdSelected,
   } = useSupplierContext();
   const { post, update, getById } = useAxios("Suppliers");
-  const { getAll } = useAxios("Selects");
+  const { selects } = useAxios();
   const [brands, setBrands] = useState<SelectDTO[]>([]);
 
   const handleSubmit = async (values: FormValues) => {
@@ -61,7 +61,7 @@ const SupplierDialog: React.FC<SupplierDialogProps> = () => {
   };
 
   const getBrands = async () => {
-    const response = await getAll<SelectDTO>("GetBrands");
+    const response = await selects("GetBrands");
     setBrands(response);
   };
 

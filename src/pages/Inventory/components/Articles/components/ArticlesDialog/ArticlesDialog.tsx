@@ -32,7 +32,7 @@ const ArticlesDialog: React.FC<ArticlesDialogProps> = () => {
     setIdSelected,
   } = useArticlesContext();
   const { post, update, getById } = useAxios("Articles");
-  const { getAll } = useAxios("Selects");
+  const { selects } = useAxios();
   const [articleType, setArticleType] = useState<SelectDTO[]>([]);
 
   const handleSubmit = async (values: FormValues) => {
@@ -62,7 +62,7 @@ const ArticlesDialog: React.FC<ArticlesDialogProps> = () => {
   };
 
   const getArticlesTypes = async () => {
-    const response = await getAll<SelectDTO>("GetArticlesTypes");
+    const response = await selects("GetArticlesTypes");
     setArticleType(response);
   };
 
