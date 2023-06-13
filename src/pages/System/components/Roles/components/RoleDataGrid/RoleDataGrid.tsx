@@ -1,5 +1,6 @@
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import { IconButton, Tooltip } from "@mui/material";
 import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import { POSDataGrid } from "common/components";
@@ -13,6 +14,7 @@ export type RoleDataGridProps = {};
 const RoleDataGrid: React.FC<RoleDataGridProps> = () => {
   const {
     setIsOpenDialog,
+    setIsOpenDialogFeatures,
     setTitleDialog,
     isGridLoading,
     setIsGridLoading,
@@ -33,6 +35,12 @@ const RoleDataGrid: React.FC<RoleDataGridProps> = () => {
     setIdSelected(id);
     setTitleDialog("Actualizar rol");
     setIsOpenDialog(true);
+  };
+
+  const handleShowDialogToAssignFeatures = (id: number) => {
+    setIdSelected(id);
+    setTitleDialog("Lista de funcionalidades");
+    setIsOpenDialogFeatures(true);
   };
 
   const handleRemove = async () => {
@@ -76,17 +84,22 @@ const RoleDataGrid: React.FC<RoleDataGridProps> = () => {
         <>
           <Tooltip title="Actualizar rol">
             <IconButton
-              aria-label="update-student"
-              onClick={() => handleShowDialogToUpdate(params.row.id)}
-            >
+              aria-label="update-role"
+              onClick={() => handleShowDialogToUpdate(params.row.id)}>
               <EditIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Asignar funcionalidades">
+            <IconButton
+              aria-label="assign-functionalities"
+              onClick={() => handleShowDialogToAssignFeatures(params.row.id)}>
+              <PlaylistAddIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="Eliminar rol">
             <IconButton
-              aria-label="delete-subject"
-              onClick={() => handleShowConfirmDialog(params.row.id)}
-            >
+              aria-label="delete-role"
+              onClick={() => handleShowConfirmDialog(params.row.id)}>
               <DeleteIcon />
             </IconButton>
           </Tooltip>

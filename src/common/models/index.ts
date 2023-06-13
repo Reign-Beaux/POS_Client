@@ -10,5 +10,6 @@ export * from './posTransactionResult';
 export * from './purchase';
 export * from './purchaseDetail';
 export * from './role';
+export * from './role_Features';
 export * from './supplier';
 export * from './user';

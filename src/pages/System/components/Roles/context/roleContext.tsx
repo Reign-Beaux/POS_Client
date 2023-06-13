@@ -7,6 +7,8 @@ type RoleProviderProps = {
 type ContextProps = {
   isOpenDialog: boolean;
   setIsOpenDialog: Function;
+  isOpenDialogFeatures: boolean;
+  setIsOpenDialogFeatures: Function;
   titleDialog: string;
   setTitleDialog: Function;
   isGridLoading: boolean;
@@ -18,6 +20,8 @@ type ContextProps = {
 const ContextEmptyState: ContextProps = {
   isOpenDialog: false,
   setIsOpenDialog: () => {},
+  isOpenDialogFeatures: false,
+  setIsOpenDialogFeatures: () => {},
   titleDialog: "",
   setTitleDialog: () => {},
   isGridLoading: true,
@@ -30,6 +34,7 @@ const RoleContext: Context<ContextProps> = createContext(ContextEmptyState);
 
 export const RoleProvider: React.FC<RoleProviderProps> = ({ children }) => {
   const [isOpenDialog, setIsOpenDialog] = useState<boolean>(false);
+  const [isOpenDialogFeatures, setIsOpenDialogFeatures] = useState<boolean>(false);
   const [titleDialog, setTitleDialog] = useState<string>("");
   const [isGridLoading, setIsGridLoading] = useState<boolean>(true);
   const [idSelected, setIdSelected] = useState<number>(0);
@@ -39,6 +44,8 @@ export const RoleProvider: React.FC<RoleProviderProps> = ({ children }) => {
       value={{
         isOpenDialog: isOpenDialog,
         setIsOpenDialog: setIsOpenDialog,
+        isOpenDialogFeatures: isOpenDialogFeatures,
+        setIsOpenDialogFeatures: setIsOpenDialogFeatures,
         titleDialog: titleDialog,
         setTitleDialog: setTitleDialog,
         isGridLoading: isGridLoading,
