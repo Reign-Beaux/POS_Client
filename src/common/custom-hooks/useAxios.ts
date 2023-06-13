@@ -99,9 +99,11 @@ const useAxios = (controller: string = "") => {
     }
   };
 
-  const selects = async (endpoint: string): Promise<SelectDTO[]> => {
+  const selects = async (endpoint: string, id: number = 0): Promise<SelectDTO[]> => {
     try {
-      const response: AxiosResponse<SelectDTO[]> = await axios.get(`${API_URL}/Selects/${endpoint}`);
+      let url = `${API_URL}/Selects/${endpoint}`;
+      if (id > 0) url += `/${id}`;
+      const response: AxiosResponse<SelectDTO[]> = await axios.get(url);
       return response.data;
     } catch (error: any) {
       const message = error?.response?.data ?? error.message;

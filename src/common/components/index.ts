@@ -15,3 +15,4 @@ export * from './POSSnackbar';
 export * from './POSTabPanel';
 export * from './POSTabs';
 export * from './POSTextField';
+export * from './POSTransferList';
