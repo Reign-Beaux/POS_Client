@@ -1,16 +1,16 @@
-import { SelectDTO } from "@/common/dtos";
 import {
-	Button,
-	Card,
-	CardHeader,
-	Checkbox,
-	Divider,
-	Grid,
-	List,
-	ListItem,
-	ListItemIcon,
-	ListItemText
+  Button,
+  Card,
+  CardHeader,
+  Checkbox,
+  Divider,
+  Grid,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText
 } from "@mui/material";
+import { SelectDTO } from "common/dtos";
 import React, { useState } from "react";
 
 export type POSTransferListProps = {

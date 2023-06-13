@@ -1,9 +1,9 @@
-import { Tooltip, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import { IconButton, Tooltip } from "@mui/material";
 import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
+import { useDialogConfirm } from "common/custom-hooks";
 import { useEmployeesContext } from "../../../context";
-import { useDialogConfirm } from "@/common/custom-hooks";
 
 const useColumnsEmployees = () => {
   const {
