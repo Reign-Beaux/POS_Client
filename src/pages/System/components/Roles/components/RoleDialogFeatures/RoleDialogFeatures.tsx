@@ -30,13 +30,8 @@ const RoleDialogFeatures: React.FC<RoleDialogFeaturesProps> = () => {
   };
 
   const updateFeatures = async () => {
-    const payload: Role_Features[] = featureByRole.map((item) => {
-      return {
-        roleId: idSelected,
-        featureId: item.value,
-      };
-    });
-    const response = await post<Role_Features[]>(payload, `UpdateRoleFeature/${idSelected}`);
+    const payload: number[] = featureByRole.map((item) => item.value);
+    const response = await post<number[]>(payload, `UpdateRoleFeature/${idSelected}`);
     if (!response.success) return;
 
     setIsOpenDialogFeatures(false);
