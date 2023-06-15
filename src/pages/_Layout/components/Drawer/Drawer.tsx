@@ -45,7 +45,7 @@ const Drawer: React.FC<DrawerProps> = () => {
       <DrawerHeader />
       <Divider />
       <List>
-        {features.map((page: Feature) => (
+        {features.filter(feature => !feature.isChildren).map((page: Feature) => (
           <FeatureItem disablePadding key={page.id}>
             <ListItemButton
               onClick={() => handleClick(page.direction, page.id)}

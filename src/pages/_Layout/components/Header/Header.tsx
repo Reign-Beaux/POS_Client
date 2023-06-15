@@ -45,7 +45,7 @@ const Header: React.FC<HeaderProps> = () => {
         </IconButton> */}
         <Typography variant="h6" component="div" sx={{ flexGrow: 1, ml: "5px" }}>
           <span style={{ color: "white", cursor: "pointer" }} onClick={handleClick}>
-            Control Escolar
+            Punto de ventas
           </span>
         </Typography>
         <Typography variant="h6" component="div"  style={{ color: "white"}}>

@@ -20,6 +20,10 @@ const routes: RouteObject[] = [
         element: <ProtectedRoute element={<Purchases />} path="/purchases" />,
       },
       {
+        path: "/purchases/:id",
+        element: <ProtectedRoute element={<PurchaseDetail />} path="/purchaseDetail" />,
+      },
+      {
         path: "/sales",
         element: <ProtectedRoute element={<Sales />} path="/sales" />,
       },
@@ -28,10 +32,6 @@ const routes: RouteObject[] = [
         element: <ProtectedRoute element={<System />} path="/system" />,
       },
     ],
-  },
-  {
-    path: "/purchaseDetail/:id",
-    element: <ProtectedRoute element={<PurchaseDetail />} path="/purchaseDetail" />,
   },
   {
     path: "/login",
