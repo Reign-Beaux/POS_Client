@@ -4,12 +4,31 @@ import { SelectDTO } from "common/dtos";
 import React from "react";
 
 export interface POSSelectProps {
+  /**
+   * Clave asociada al campo de selección en el objeto Formik.
+   */
   keyFormik: string;
+  /**
+   * Etiqueta del campo de selección.
+   */
   label: string;
+  /**
+   * Objeto Formik asociado al campo de selección.
+   */
   formik: any;
+  /**
+   * Registros para las opciones de selección.
+   */
   datas: SelectDTO[];
 }
 
+/**
+ * Select personalizado.
+ *
+ * Este componente muestra un campo de selección utilizando el componente `Select` de Material-UI.
+ * Permite seleccionar una opción de una lista de opciones proporcionadas en la propiedad `datas`.
+ * Se pueden proporcionar propiedades adicionales para personalizar el campo de selección.
+ */
 const POSSelect: React.FC<POSSelectProps> = ({ keyFormik, label, formik, datas }) => {
   return (
     <FormControl

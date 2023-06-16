@@ -3,9 +3,19 @@ import { TransitionProps } from "@mui/material/transitions";
 import React from "react";
 
 export interface POSDialogProps extends DialogProps {
+  /**
+   * Elementos secundarios que se mostrarán dentro del dialog.
+   */
   children: React.ReactNode;
 }
 
+/**
+ * Dialog personalizado.
+ *
+ * Este componente muestra un diálogo personalizado utilizando el componente `Dialog` de Material-UI.
+ * Se pueden proporcionar elementos secundarios para mostrar dentro del diálogo y se pueden aplicar
+ * propiedades y opciones específicas.
+ */
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement;

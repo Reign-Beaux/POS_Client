@@ -3,10 +3,22 @@ import { AppBar, Toolbar, IconButton, Typography, Button, Tooltip } from "@mui/m
 import React from "react";
 
 export type POSDialogHeaderProps = {
+  /**
+   * El título del dialog.
+   */
   titleDialog: string;
+  /**
+   * Función para establecer si el dialog está abierto o cerrado.
+   */
   setIsOpenDialog: Function;
 };
 
+/**
+ * Encabezado del diálogo.
+ *
+ * Este componente muestra el encabezado de un dialog, se pueden proporcionar un título y una función
+ * para controlar el estado del diálogo.
+ */
 const POSDialogHeader: React.FC<POSDialogHeaderProps> = ({ titleDialog, setIsOpenDialog }) => {
   return (
     <AppBar sx={{ position: "relative" }}>

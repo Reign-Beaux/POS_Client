@@ -1,5 +1,5 @@
 import { POSReducer } from "@/redux";
-import { resetConfirm, setResponse } from "@/redux/slices";
+import { setResponse } from "@/redux/slices";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import {
@@ -18,6 +18,11 @@ import { POSButton } from "../POSButton";
 
 export type POSConfirmationDialogProps = {};
 
+/**
+ * Componente de dialog de confirmación.
+ *
+ * Este componente muestra un dialog de confirmación con un mensaje personalizado y botones de aceptar y cancelar.
+ */
 const POSConfirmationDialog: React.FC<POSConfirmationDialogProps> = () => {
   const dispatcher = useDispatch();
   const { isOpen, message } = useSelector((store: POSReducer) => store.confirm);
@@ -48,8 +53,7 @@ const POSConfirmationDialog: React.FC<POSConfirmationDialogProps> = () => {
           variant="outlined"
           color="secondary"
           style={{ marginTop: "15px", width: "150px" }}
-          onClick={() => handleResult(false)}
-        >
+          onClick={() => handleResult(false)}>
           <CloseIcon /> Cancelar
         </Button>
       </DialogActions>

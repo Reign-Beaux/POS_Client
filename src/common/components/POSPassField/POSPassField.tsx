@@ -4,6 +4,13 @@ import React, { useState } from "react";
 import { POSTextField, POSTextFieldProps } from "../POSTextField";
 export interface POSPassFieldProps extends POSTextFieldProps {}
 
+/**
+ * Campo de contraseña personalizado.
+ *
+ * Este componente muestra un campo de contraseña utilizando el componente `POSTextField` y
+ * permite alternar la visibilidad de la contraseña al hacer clic en un ícono de visibilidad.
+ * Se pueden proporcionar propiedades adicionales para personalizar el campo de contraseña.
+ */
 const POSPassField: React.FC<POSPassFieldProps> = ({
   keyFormik,
   label,

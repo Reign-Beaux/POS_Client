@@ -8,26 +8,49 @@ import {
   List,
   ListItem,
   ListItemIcon,
-  ListItemText
+  ListItemText,
 } from "@mui/material";
 import { SelectDTO } from "common/dtos";
 import React, { useState } from "react";
 
 export type POSTransferListProps = {
+  /**
+   * Elementos en la lista izquierda.
+   */
   left: readonly SelectDTO[];
+  
+  /**
+   * Función para establecer los elementos en la lista izquierda.
+   */
   setLeft: Function;
+  
+  /**
+   * Elementos en la lista derecha.
+   */
   right: readonly SelectDTO[];
+  
+  /**
+   * Función para establecer los elementos en la lista derecha.
+   */
   setRight: Function;
 };
 
+// Obtiene los elementos que no estan en la lista `a`.
 const not = (a: readonly SelectDTO[], b: readonly SelectDTO[]) =>
   a.filter((value) => !b.some((item) => item.value === value.value));
 
+// Obtiene los elementos comunes entre las listas `a` y `b`.
 const intersection = (a: readonly SelectDTO[], b: readonly SelectDTO[]) =>
   a.filter((value) => b.some((item) => item.value === value.value));
 
+// Combina los elementos de las listas `a` y `b` sin duplicados.
 const union = (a: readonly SelectDTO[], b: readonly SelectDTO[]) => [...a, ...not(b, a)];
 
+/**
+ * Componente de lista de transferencia.
+ *
+ * Representa una lista de transferencia que permite mover elementos entre dos listas.
+ */
 const POSTransferList: React.FC<POSTransferListProps> = ({ left, setLeft, right, setRight }) => {
   const [checked, setChecked] = useState<readonly SelectDTO[]>([]);
 
