@@ -3,7 +3,6 @@ import { PurchasingProcessProvider } from "./context";
 import {
   PurchasingProcessActionButtons,
   PurchasingProcessDataGrid,
-  PurchasingProcessDetail,
   PurchasingProcessDialog,
 } from "./components";
 
@@ -15,7 +14,6 @@ const PurchasingProcess: React.FC<PurchasingProcessProps> = () => {
       <PurchasingProcessActionButtons />
       <PurchasingProcessDataGrid />
       <PurchasingProcessDialog />
-      <PurchasingProcessDetail />
     </PurchasingProcessProvider>
   );
 };
