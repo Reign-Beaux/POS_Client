@@ -1,5 +1,5 @@
-import { POSTabPanel, POSTabs } from "common/components";
 import { Box } from "@mui/system";
+import { POSTabPanel, POSTabs } from "common/components";
 import React, { useState } from "react";
 import { Brands, PurchaseReception, PurchasingProcess, Suppliers } from "./components";
 export interface PurchasesProps {}
