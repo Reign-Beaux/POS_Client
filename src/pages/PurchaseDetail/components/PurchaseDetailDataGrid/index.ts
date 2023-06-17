@@ -1,0 +1,1 @@
+export { default as PurchaseDetailDataGrid } from './PurchaseDetailDataGrid';
