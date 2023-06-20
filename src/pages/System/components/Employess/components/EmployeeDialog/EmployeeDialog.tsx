@@ -24,7 +24,7 @@ const EmployeeDialog: React.FC<EmployeeDialogProps> = () => {
     setIdSelected,
   } = useEmployeesContext();
   const { post, update, getById } = useAxios("Employees");
-  const { getAll } = useAxios("Selects");
+  const { selects } = useAxios();
   const [areas, setAreas] = useState<SelectDTO[]>([]);
 
   const handleSubmit = async (values: FormValues) => {
@@ -55,7 +55,7 @@ const EmployeeDialog: React.FC<EmployeeDialogProps> = () => {
   };
 
   const getAreas = async () => {
-    const response = await getAll<SelectDTO>("GetAreas");
+    const response = await selects("GetAreas");
     setAreas(response);
   };
 
