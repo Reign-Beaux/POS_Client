@@ -1,4 +1,5 @@
 import { Context, createContext, useContext, useState } from "react";
+import { useParams } from "react-router-dom";
 
 type PurchaseDetailProviderProps = {
   children: React.ReactNode;
@@ -13,6 +14,7 @@ type ContextProps = {
   setIsGridLoading: Function;
   idSelected: number;
   setIdSelected: Function;
+  purchaseId: number;
 };
 
 const ContextEmptyState: ContextProps = {
@@ -24,11 +26,13 @@ const ContextEmptyState: ContextProps = {
   setIsGridLoading: () => {},
   idSelected: 0,
   setIdSelected: () => {},
+  purchaseId: 0
 };
 
 const PurchaseDetailContext: Context<ContextProps> = createContext(ContextEmptyState);
 
 export const PurchaseDetailProvider: React.FC<PurchaseDetailProviderProps> = ({ children }) => {
+  const { id } = useParams<{ id: string }>();
   const [isOpenDialog, setIsOpenDialog] = useState<boolean>(false);
   const [titleDialog, setTitleDialog] = useState<string>("");
   const [isGridLoading, setIsGridLoading] = useState<boolean>(true);
@@ -45,6 +49,7 @@ export const PurchaseDetailProvider: React.FC<PurchaseDetailProviderProps> = ({ 
         setIsGridLoading: setIsGridLoading,
         idSelected: idSelected,
         setIdSelected: setIdSelected,
+        purchaseId: Number(id)
       }}
     >
       {children}

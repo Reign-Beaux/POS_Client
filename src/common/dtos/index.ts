@@ -3,6 +3,7 @@ export * from './employeeDTO';
 export * from './inventoryDTO';
 export * from './loginDTO';
 export * from './purchaseDTO';
+export * from './purchaseDetailDTO';
 export * from './purchaseRequestDTO';
 export * from './selectDTO';
 export * from './supplierDTO';

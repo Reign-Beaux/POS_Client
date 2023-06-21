@@ -1,6 +1,5 @@
 export interface PurchaseDetail {
   id: number;
-  record: number;
   purchaseId: number;
   articleId: number;
   quantitySold: number;
@@ -12,7 +11,6 @@ export interface PurchaseDetail {
 
 export const purchaseDetailEmpty: PurchaseDetail = {
   id: 0,
-  record: 0,
   purchaseId: 0,
   articleId: 0,
   quantitySold: 0,
