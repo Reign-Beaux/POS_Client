@@ -1,17 +1,9 @@
+import { Button, Grid } from "@mui/material";
 import React from "react";
-import { usePurchaseDetailContext } from "../../context";
-import { Box, Button, Grid, Paper, styled } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { usePurchaseDetailContext } from "../../context";
 
 export type PurchaseDetailActionButtonsProps = {};
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
 
 const PurchaseDetailActionButtons: React.FC<PurchaseDetailActionButtonsProps> = () => {
   const navigate = useNavigate();
