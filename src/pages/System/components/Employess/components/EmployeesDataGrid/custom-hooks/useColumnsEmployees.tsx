@@ -5,7 +5,7 @@ import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import { useDialogConfirm } from "common/custom-hooks";
 import { useEmployeesContext } from "../../../context";
 
-const useColumnsEmployees = () => {
+const useColumnsEmployees = (handleRemove: Function) => {
   const {
     setIsOpenDialog,
     setTitleDialog,
@@ -21,7 +21,7 @@ const useColumnsEmployees = () => {
 
   const handleShowConfirmDialog = (id: number) => {
     setIdSelected(id);
-    showDialogConfirm("¿Desea eliminar el registro?");
+    showDialogConfirm("¿Desea eliminar el registro?", handleRemove);
   };
 
   const columns = (): GridColDef[] => {

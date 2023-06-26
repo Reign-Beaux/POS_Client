@@ -21,7 +21,7 @@ const BrandDataGrid: React.FC<BrandDataGridProps> = () => {
     setIdSelected,
   } = useBrandContext();
   const { getAll, remove } = useAxios("Brands");
-  const { showDialogConfirm, resetResponse, response } = useDialogConfirm();
+  const { showDialogConfirm } = useDialogConfirm();
   const [brands, setBrands] = useState<Brand[]>([]);
 
   const getBrands = async () => {
@@ -42,11 +42,12 @@ const BrandDataGrid: React.FC<BrandDataGridProps> = () => {
     if (!result.success) return;
 
     getBrands();
+    setIdSelected(0);
   };
 
   const handleShowConfirmDialog = (id: number) => {
     setIdSelected(id);
-    showDialogConfirm("¿Desea eliminar el registro?");
+    showDialogConfirm("¿Desea eliminar el registro?", handleRemove);
   };
 	
   const columns: GridColDef[] = [
@@ -101,17 +102,6 @@ const BrandDataGrid: React.FC<BrandDataGridProps> = () => {
 
     getBrands();
   }, [isGridLoading]);
-
-  useEffect(() => {
-    if (!response) {
-      resetResponse();
-      setIdSelected(0);
-      return;
-    }
-
-    handleRemove();
-    resetResponse();
-  }, [response]);
   
   return <POSDataGrid dataSource={brands} columns={columns} />;
 };

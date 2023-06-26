@@ -20,7 +20,7 @@ const SupplierDataGrid: React.FC<SupplierDataGridProps> = () => {
     setIdSelected,
   } = useSupplierContext();
   const { getAll, remove } = useAxios("Suppliers");
-  const { showDialogConfirm, resetResponse, response } = useDialogConfirm();
+  const { showDialogConfirm } = useDialogConfirm();
   const [suppliers, setSuppliers] = useState<SupplierDTO[]>([]);
 
   const getSuppliers = async () => {
@@ -41,11 +41,12 @@ const SupplierDataGrid: React.FC<SupplierDataGridProps> = () => {
     if (!result.success) return;
 
     getSuppliers();
+    setIdSelected(0);
   };
 
   const handleShowConfirmDialog = (id: number) => {
     setIdSelected(id);
-    showDialogConfirm("¿Desea eliminar el registro?");
+    showDialogConfirm("¿Desea eliminar el registro?", handleRemove);
   };
 
   const columns: GridColDef[] = [
@@ -147,17 +148,6 @@ const SupplierDataGrid: React.FC<SupplierDataGridProps> = () => {
 
     getSuppliers();
   }, [isGridLoading]);
-
-  useEffect(() => {
-    if (!response) {
-      resetResponse();
-      setIdSelected(0);
-      return;
-    }
-
-    handleRemove();
-    resetResponse();
-  }, [response]);
 
   return <POSDataGrid dataSource={suppliers} columns={columns} />;
 };

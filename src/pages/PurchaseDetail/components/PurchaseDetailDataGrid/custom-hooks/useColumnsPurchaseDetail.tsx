@@ -5,7 +5,7 @@ import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import { usePurchaseDetailContext } from "../../../context";
 import { useDialogConfirm } from "common/custom-hooks";
 
-const useColumnsPurchaseDetail = () => {
+const useColumnsPurchaseDetail = (handleRemove: Function) => {
   const { setIsOpenDialog, setTitleDialog, setIdSelected } = usePurchaseDetailContext();
   const { showDialogConfirm } = useDialogConfirm();
 
@@ -17,7 +17,7 @@ const useColumnsPurchaseDetail = () => {
 
   const handleShowConfirmDialog = (id: number) => {
     setIdSelected(id);
-    showDialogConfirm("¿Desea eliminar el registro?");
+    showDialogConfirm("¿Desea eliminar el registro?", handleRemove);
   };
 
   const columns = (): GridColDef[] => {

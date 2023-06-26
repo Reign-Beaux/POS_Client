@@ -1,14 +1,15 @@
 import { POSReducer } from "@/redux";
 import { resetConfirm, setConfirm } from "@/redux/slices";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const useDialogConfirm = () => {
   const dispatcher = useDispatch();
   const { responseConfirmation } = useSelector((store: POSReducer) => store.confirm);
-  const [response, setResponse] = useState<boolean | null>(null);
+  const callbackConfirmation = useRef<Function>(() => {});
 
-  const showDialogConfirm = (message: string) => {
+  const showDialogConfirm = (message: string, callback: Function) => {
+    callbackConfirmation.current = callback;
     dispatcher(
       setConfirm({
         isOpen: true,
@@ -17,19 +18,15 @@ const useDialogConfirm = () => {
     );
   };
 
-  const resetResponse = () => setResponse(null);
-
   useEffect(() => {
     if (responseConfirmation === null) return;
-    
-    setResponse(responseConfirmation);
+    if (responseConfirmation) callbackConfirmation.current();
+
     dispatcher(resetConfirm());
   }, [responseConfirmation]);
 
   return {
     showDialogConfirm,
-    resetResponse,
-    response,
   };
 };
 

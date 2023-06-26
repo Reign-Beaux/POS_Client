@@ -23,7 +23,7 @@ const PurchasingProcessDataGrid: React.FC<PurchasingProcessDataGridProps> = () =
   } = usePurchasingProcessContext();
   const navigate = useNavigate();
   const { getAll, remove } = useAxios("Purchases");
-  const { showDialogConfirm, resetResponse, response } = useDialogConfirm();
+  const { showDialogConfirm } = useDialogConfirm();
   const [purchases, setPurchases] = useState<PurchaseDTO[]>([]);
 
   const getPurchases = async () => {
@@ -44,11 +44,12 @@ const PurchasingProcessDataGrid: React.FC<PurchasingProcessDataGridProps> = () =
     if (!result.success) return;
 
     getPurchases();
+    setIdSelected(0);
   };
 
   const handleShowConfirmDialog = (id: number) => {
     setIdSelected(id);
-    showDialogConfirm("¿Desea eliminar el registro?");
+    showDialogConfirm("¿Desea eliminar el registro?", handleRemove);
   };
 
   const handleShowDetail = (id: number) => navigate(`/purchases/${id}`);
@@ -129,17 +130,6 @@ const PurchasingProcessDataGrid: React.FC<PurchasingProcessDataGridProps> = () =
 
     getPurchases();
   }, [isGridLoading]);
-
-  useEffect(() => {
-    if (!response) {
-      resetResponse();
-      setIdSelected(0);
-      return;
-    }
-
-    handleRemove();
-    resetResponse();
-  }, [response]);
 
   return <POSDataGrid dataSource={purchases} columns={columns} />;
 };

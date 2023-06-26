@@ -15,8 +15,6 @@ const EmployeesDataGrid: React.FC<EmployeesDataGridProps> = () => {
     setIdSelected,
   } = useEmployeesContext();
   const { getAll, remove } = useAxios("Employees");
-  const { resetResponse, response } = useDialogConfirm();
-  const { columns } = useColumnsEmployees();
   const [employees, setEmployees] = useState<EmployeeDTO[]>([]);
 
   const getEmployees = async () => {
@@ -31,24 +29,16 @@ const EmployeesDataGrid: React.FC<EmployeesDataGridProps> = () => {
     if (!result.success) return;
 
     getEmployees();
+    setIdSelected(0);
   };
+
+  const { columns } = useColumnsEmployees(handleRemove);
 
   useEffect(() => {
     if (!isGridLoading) return;
 
     getEmployees();
   }, [isGridLoading]);
-
-  useEffect(() => {
-    if (!response) {
-      resetResponse();
-      setIdSelected(0);
-      return;
-    }
-
-    handleRemove();
-    resetResponse();
-  }, [response]);
   
   return <POSDataGrid dataSource={employees} columns={columns()} />;
 };

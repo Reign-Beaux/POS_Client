@@ -22,7 +22,7 @@ const RoleDataGrid: React.FC<RoleDataGridProps> = () => {
     setIdSelected,
   } = useRoleContext();
   const { getAll, remove } = useAxios("Roles");
-  const { showDialogConfirm, resetResponse, response } = useDialogConfirm();
+  const { showDialogConfirm } = useDialogConfirm();
   const [roles, setRoles] = useState<Role[]>([]);
 
   const getRoles = async () => {
@@ -49,11 +49,12 @@ const RoleDataGrid: React.FC<RoleDataGridProps> = () => {
     if (!result.success) return;
 
     getRoles();
+    setIdSelected(0);
   };
 
   const handleShowConfirmDialog = (id: number) => {
     setIdSelected(id);
-    showDialogConfirm("¿Desea eliminar el registro?");
+    showDialogConfirm("¿Desea eliminar el registro?", handleRemove);
   };
 
   const columns: GridColDef[] = [
@@ -114,16 +115,6 @@ const RoleDataGrid: React.FC<RoleDataGridProps> = () => {
     getRoles();
   }, [isGridLoading]);
 
-  useEffect(() => {
-    if (!response) {
-      resetResponse();
-      setIdSelected(0);
-      return;
-    }
-
-    handleRemove();
-    resetResponse();
-  }, [response]);
   return <POSDataGrid dataSource={roles} columns={columns} />;
 };
 

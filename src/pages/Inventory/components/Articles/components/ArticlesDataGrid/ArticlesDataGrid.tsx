@@ -1,10 +1,10 @@
-import { POSDataGrid } from "common/components";
-import { useAxios, useDialogConfirm } from "common/custom-hooks";
-import { ArticleDTO } from "common/dtos";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { Checkbox, IconButton, Tooltip } from "@mui/material";
 import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
+import { POSDataGrid } from "common/components";
+import { useAxios, useDialogConfirm } from "common/custom-hooks";
+import { ArticleDTO } from "common/dtos";
 import React, { useEffect, useState } from "react";
 import { useArticlesContext } from "../../context";
 
@@ -20,7 +20,7 @@ const ArticlesDataGrid: React.FC<ArticlesDataGridProps> = () => {
     setIdSelected,
   } = useArticlesContext();
   const { getAll, remove } = useAxios("Articles");
-  const { showDialogConfirm, resetResponse, response } = useDialogConfirm();
+  const { showDialogConfirm } = useDialogConfirm();
   const [articles, setArticles] = useState<ArticleDTO[]>([]);
 
   const getArticles = async () => {
@@ -41,11 +41,12 @@ const ArticlesDataGrid: React.FC<ArticlesDataGridProps> = () => {
     if (!result.success) return;
 
     getArticles();
+    setIdSelected(0);
   };
 
   const handleShowConfirmDialog = (id: number) => {
     setIdSelected(id);
-    showDialogConfirm("¿Desea eliminar el registro?");
+    showDialogConfirm("¿Desea eliminar el registro?", handleRemove);
   };
 
   const columns: GridColDef[] = [
@@ -96,16 +97,14 @@ const ArticlesDataGrid: React.FC<ArticlesDataGridProps> = () => {
           <Tooltip title="Actualizar artículo">
             <IconButton
               aria-label="update-student"
-              onClick={() => handleShowDialogToUpdate(params.row.id)}
-            >
+              onClick={() => handleShowDialogToUpdate(params.row.id)}>
               <EditIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="Eliminar artículo">
             <IconButton
               aria-label="delete-subject"
-              onClick={() => handleShowConfirmDialog(params.row.id)}
-            >
+              onClick={() => handleShowConfirmDialog(params.row.id)}>
               <DeleteIcon />
             </IconButton>
           </Tooltip>
@@ -119,17 +118,6 @@ const ArticlesDataGrid: React.FC<ArticlesDataGridProps> = () => {
 
     getArticles();
   }, [isGridLoading]);
-
-  useEffect(() => {
-    if (!response) {
-      resetResponse();
-      setIdSelected(0);
-      return;
-    }
-
-    handleRemove();
-    resetResponse();
-  }, [response]);
 
   return <POSDataGrid dataSource={articles} columns={columns} />;
 };

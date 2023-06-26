@@ -1,5 +1,5 @@
 import { POSDataGrid } from "common/components";
-import { useAxios, useDialogConfirm } from "common/custom-hooks";
+import { useAxios } from "common/custom-hooks";
 import { Area } from "common/models";
 import React, { useEffect, useState } from "react";
 import { useAreaContext } from "../../context";
@@ -15,8 +15,6 @@ const AreaDataGrid: React.FC<AreaDataGridProps> = () => {
     setIdSelected,
   } = useAreaContext();
   const { getAll, remove } = useAxios("Areas");
-  const { resetResponse, response } = useDialogConfirm();
-  const { columns } = useColumsArea();
   const [areas, setAreas] = useState<Area[]>([]);
 
   const getAreas = async () => {
@@ -31,25 +29,16 @@ const AreaDataGrid: React.FC<AreaDataGridProps> = () => {
     if (!result.success) return;
 
     getAreas();
+    setIdSelected(0);
   };
 
+  const { columns } = useColumsArea(handleRemove);
 
   useEffect(() => {
     if (!isGridLoading) return;
 
     getAreas();
   }, [isGridLoading]);
-
-  useEffect(() => {
-    if (!response) {
-      resetResponse();
-      setIdSelected(0);
-      return;
-    }
-
-    handleRemove();
-    resetResponse();
-  }, [response]);
 
   return <POSDataGrid dataSource={areas} columns={columns()} />;
 };

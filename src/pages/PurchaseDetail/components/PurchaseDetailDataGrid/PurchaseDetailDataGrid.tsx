@@ -11,8 +11,6 @@ const PurchaseDetailDataGrid: React.FC<PurchaseDetailDataGridProps> = () => {
   const { isGridLoading, setIsGridLoading, idSelected, setIdSelected, purchaseId } =
     usePurchaseDetailContext();
   const { getAll, remove } = useAxios("PurchaseDetails");
-  const { resetResponse, response } = useDialogConfirm();
-  const { columns } = useColumnsPurchaseDetail();
   const [purchaseDetails, setPurchaseDetails] = useState<PurchaseDetailDTO[]>([]);
 
   const getPurchaseDetails = async () => {
@@ -27,24 +25,16 @@ const PurchaseDetailDataGrid: React.FC<PurchaseDetailDataGridProps> = () => {
     if (!result.success) return;
 
     getPurchaseDetails();
+    setIdSelected(0);
   };
+
+  const { columns } = useColumnsPurchaseDetail(handleRemove);
 
   useEffect(() => {
     if (!isGridLoading) return;
 
     getPurchaseDetails();
   }, [isGridLoading]);
-
-  useEffect(() => {
-    if (!response) {
-      resetResponse();
-      setIdSelected(0);
-      return;
-    }
-
-    handleRemove();
-    resetResponse();
-  }, [response]);
 
   return <POSDataGrid columns={columns()} dataSource={purchaseDetails} />;
 };

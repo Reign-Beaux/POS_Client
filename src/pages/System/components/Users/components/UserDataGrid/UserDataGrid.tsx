@@ -20,7 +20,7 @@ const UserDataGrid: React.FC<UserDataGridProps> = () => {
     setIdSelected,
   } = useUserContext();
   const { getAll, remove } = useAxios("Users");
-  const { showDialogConfirm, resetResponse, response } = useDialogConfirm();
+  const { showDialogConfirm } = useDialogConfirm();
   const [users, setUsers] = useState<UserDTO[]>([]);
 
   const getUsers = async () => {
@@ -41,11 +41,12 @@ const UserDataGrid: React.FC<UserDataGridProps> = () => {
     if (!result.success) return;
 
     getUsers();
+    setIdSelected(0);
   };
 
   const handleShowConfirmDialog = (id: number) => {
     setIdSelected(id);
-    showDialogConfirm("¿Desea eliminar el registro?");
+    showDialogConfirm("¿Desea eliminar el registro?", handleRemove);
   };
 	
   const columns: GridColDef[] = [
@@ -122,16 +123,6 @@ const UserDataGrid: React.FC<UserDataGridProps> = () => {
     getUsers();
   }, [isGridLoading]);
 
-  useEffect(() => {
-    if (!response) {
-      resetResponse();
-      setIdSelected(0);
-      return;
-    }
-
-    handleRemove();
-    resetResponse();
-  }, [response]);
   return <POSDataGrid dataSource={users} columns={columns} />;
 };
 
