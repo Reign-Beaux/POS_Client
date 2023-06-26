@@ -19,13 +19,12 @@ const PurchaseDetailDataGrid: React.FC<PurchaseDetailDataGridProps> = () => {
     setIsGridLoading(false);
   };
 
-  const handleRemove = async () => {
-    const result = await remove(idSelected);
+  const handleRemove = async (id: number) => {
+    const result = await remove(id);
 
     if (!result.success) return;
 
     getPurchaseDetails();
-    setIdSelected(0);
   };
 
   const { columns } = useColumnsPurchaseDetail(handleRemove);

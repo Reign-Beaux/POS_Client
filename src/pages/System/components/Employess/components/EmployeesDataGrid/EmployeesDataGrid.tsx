@@ -23,13 +23,12 @@ const EmployeesDataGrid: React.FC<EmployeesDataGridProps> = () => {
     setIsGridLoading(false);
   };
 
-  const handleRemove = async () => {
-    const result = await remove(idSelected);
+  const handleRemove = async (id: number) => {
+    const result = await remove(id);
 
     if (!result.success) return;
 
     getEmployees();
-    setIdSelected(0);
   };
 
   const { columns } = useColumnsEmployees(handleRemove);

@@ -1,10 +1,10 @@
-import { POSDataGrid } from "common/components";
-import { useAxios, useDialogConfirm } from "common/custom-hooks";
-import { ArticleType } from "common/models";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { IconButton, Tooltip } from "@mui/material";
 import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
+import { POSDataGrid } from "common/components";
+import { useAxios, useDialogConfirm } from "common/custom-hooks";
+import { ArticleType } from "common/models";
 import React, { useEffect, useState } from "react";
 import { useArticlesTypesContext } from "../../context";
 
@@ -20,7 +20,7 @@ const ArticlesTypesDatagrid: React.FC<ArticlesTypesDatagridProps> = () => {
     setIdSelected,
   } = useArticlesTypesContext();
   const { getAll, remove } = useAxios("ArticlesTypes");
-  const { showDialogConfirm, resetResponse, response } = useDialogConfirm();
+  const { showDialogConfirm } = useDialogConfirm();
   const [articlesTypes, setArticlesTypes] = useState<ArticleType[]>([]);
 
   const getArticlesTypes = async () => {
@@ -35,7 +35,7 @@ const ArticlesTypesDatagrid: React.FC<ArticlesTypesDatagridProps> = () => {
     setIsOpenDialog(true);
   };
 
-  const handleRemove = async () => {
+  const handleRemove = async (id: number) => {
     const result = await remove(idSelected);
 
     if (!result.success) return;
@@ -43,10 +43,8 @@ const ArticlesTypesDatagrid: React.FC<ArticlesTypesDatagridProps> = () => {
     getArticlesTypes();
   };
 
-  const handleShowConfirmDialog = (id: number) => {
-    setIdSelected(id);
-    showDialogConfirm("¿Desea eliminar el registro?");
-  };
+  const handleShowConfirmDialog = (id: number) =>
+    showDialogConfirm("¿Desea eliminar el registro?", () => handleRemove(id));
 
   const columns: GridColDef[] = [
     {
@@ -77,16 +75,14 @@ const ArticlesTypesDatagrid: React.FC<ArticlesTypesDatagridProps> = () => {
           <Tooltip title="Actualizar tipo de artículo">
             <IconButton
               aria-label="update-student"
-              onClick={() => handleShowDialogToUpdate(params.row.id)}
-            >
+              onClick={() => handleShowDialogToUpdate(params.row.id)}>
               <EditIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="Eliminar tipo de artículo">
             <IconButton
               aria-label="delete-subject"
-              onClick={() => handleShowConfirmDialog(params.row.id)}
-            >
+              onClick={() => handleShowConfirmDialog(params.row.id)}>
               <DeleteIcon />
             </IconButton>
           </Tooltip>

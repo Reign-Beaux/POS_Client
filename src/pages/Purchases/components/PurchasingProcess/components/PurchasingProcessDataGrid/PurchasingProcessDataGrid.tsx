@@ -13,14 +13,8 @@ import { usePurchasingProcessContext } from "../../context";
 export type PurchasingProcessDataGridProps = {};
 
 const PurchasingProcessDataGrid: React.FC<PurchasingProcessDataGridProps> = () => {
-  const {
-    setIsOpenDialog,
-    setTitleDialog,
-    isGridLoading,
-    setIsGridLoading,
-    idSelected,
-    setIdSelected,
-  } = usePurchasingProcessContext();
+  const { setIsOpenDialog, setTitleDialog, isGridLoading, setIsGridLoading, setIdSelected } =
+    usePurchasingProcessContext();
   const navigate = useNavigate();
   const { getAll, remove } = useAxios("Purchases");
   const { showDialogConfirm } = useDialogConfirm();
@@ -38,19 +32,16 @@ const PurchasingProcessDataGrid: React.FC<PurchasingProcessDataGridProps> = () =
     setIsOpenDialog(true);
   };
 
-  const handleRemove = async () => {
-    const result = await remove(idSelected);
+  const handleRemove = async (id: number) => {
+    const result = await remove(id);
 
     if (!result.success) return;
 
     getPurchases();
-    setIdSelected(0);
   };
 
-  const handleShowConfirmDialog = (id: number) => {
-    setIdSelected(id);
-    showDialogConfirm("¿Desea eliminar el registro?", handleRemove);
-  };
+  const handleShowConfirmDialog = (id: number) =>
+    showDialogConfirm("¿Desea eliminar el registro?", () => handleRemove(id));
 
   const handleShowDetail = (id: number) => navigate(`/purchases/${id}`);
 

@@ -36,19 +36,16 @@ const BrandDataGrid: React.FC<BrandDataGridProps> = () => {
     setIsOpenDialog(true);
   };
 
-  const handleRemove = async () => {
-    const result = await remove(idSelected);
+  const handleRemove = async (id: number) => {
+    const result = await remove(id);
 
     if (!result.success) return;
 
     getBrands();
-    setIdSelected(0);
   };
 
-  const handleShowConfirmDialog = (id: number) => {
-    setIdSelected(id);
-    showDialogConfirm("¿Desea eliminar el registro?", handleRemove);
-  };
+  const handleShowConfirmDialog = (id: number) =>
+    showDialogConfirm("¿Desea eliminar el registro?", () => handleRemove(id));
 	
   const columns: GridColDef[] = [
     {

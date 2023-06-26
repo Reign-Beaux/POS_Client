@@ -35,19 +35,16 @@ const SupplierDataGrid: React.FC<SupplierDataGridProps> = () => {
     setIsOpenDialog(true);
   };
 
-  const handleRemove = async () => {
+  const handleRemove = async (id: number) => {
     const result = await remove(idSelected);
 
     if (!result.success) return;
 
     getSuppliers();
-    setIdSelected(0);
   };
 
-  const handleShowConfirmDialog = (id: number) => {
-    setIdSelected(id);
-    showDialogConfirm("¿Desea eliminar el registro?", handleRemove);
-  };
+  const handleShowConfirmDialog = (id: number) =>
+    showDialogConfirm("¿Desea eliminar el registro?", () => handleRemove(id));
 
   const columns: GridColDef[] = [
     {

@@ -23,13 +23,12 @@ const AreaDataGrid: React.FC<AreaDataGridProps> = () => {
     setIsGridLoading(false);
   };
 
-  const handleRemove = async () => {
-    const result = await remove(idSelected);
+  const handleRemove = async (id: number) => {
+    const result = await remove(id);
 
     if (!result.success) return;
 
     getAreas();
-    setIdSelected(0);
   };
 
   const { columns } = useColumsArea(handleRemove);

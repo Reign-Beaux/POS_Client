@@ -19,10 +19,8 @@ const useColumnsEmployees = (handleRemove: Function) => {
     setIsOpenDialog(true);
   };
 
-  const handleShowConfirmDialog = (id: number) => {
-    setIdSelected(id);
-    showDialogConfirm("¿Desea eliminar el registro?", handleRemove);
-  };
+  const handleShowConfirmDialog = (id: number) =>
+    showDialogConfirm("¿Desea eliminar el registro?", () => handleRemove(id));
 
   const columns = (): GridColDef[] => {
     return [
