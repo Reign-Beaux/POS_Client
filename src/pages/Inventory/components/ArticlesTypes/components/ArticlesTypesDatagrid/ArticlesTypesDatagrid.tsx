@@ -36,7 +36,7 @@ const ArticlesTypesDatagrid: React.FC<ArticlesTypesDatagridProps> = () => {
   };
 
   const handleRemove = async (id: number) => {
-    const result = await remove(idSelected);
+    const result = await remove(id);
 
     if (!result.success) return;
 
@@ -96,17 +96,6 @@ const ArticlesTypesDatagrid: React.FC<ArticlesTypesDatagridProps> = () => {
 
     getArticlesTypes();
   }, [isGridLoading]);
-
-  useEffect(() => {
-    if (!response) {
-      resetResponse();
-      setIdSelected(0);
-      return;
-    }
-
-    handleRemove();
-    resetResponse();
-  }, [response]);
 
   return <POSDataGrid dataSource={articlesTypes} columns={columns} />;
 };
