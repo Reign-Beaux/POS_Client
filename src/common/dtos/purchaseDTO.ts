@@ -6,4 +6,5 @@ export interface PurchaseDTO {
   taxes: number;
   total: number;
   orderDate: Date;
+  status: number;
 }

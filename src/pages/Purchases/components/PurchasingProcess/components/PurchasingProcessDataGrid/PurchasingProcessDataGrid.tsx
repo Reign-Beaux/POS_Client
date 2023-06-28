@@ -9,6 +9,7 @@ import { PurchaseDTO } from "common/dtos";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { usePurchasingProcessContext } from "../../context";
+import { PurchaseStatusTexts } from "common/consts";
 
 export type PurchasingProcessDataGridProps = {};
 
@@ -80,6 +81,14 @@ const PurchasingProcessDataGrid: React.FC<PurchasingProcessDataGridProps> = () =
       flex: 1,
       minWidth: 150,
       editable: false,
+    },
+    {
+      field: "status",
+      headerName: "Estatus",
+      flex: 1,
+      minWidth: 150,
+      editable: false,
+      renderCell: (params: GridRenderCellParams) => <>{ PurchaseStatusTexts[params.row.status] }</>,
     },
     {
       field: "actions",

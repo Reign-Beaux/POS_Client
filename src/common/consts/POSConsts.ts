@@ -37,3 +37,20 @@ export enum ConfirmActionMessage {
 export enum Taxes {
   IVA = 0.16,
 }
+
+/**
+ * Estado de la compra.
+ */
+export enum PurchaseStatus {
+  PENDIENTE = 1,
+  CONFIRMADO = 2,
+  PROGRAMADO = 3,
+  RECIBIDO = 4,
+}
+
+export const PurchaseStatusTexts: { [key: number]: string } = {
+  [PurchaseStatus.PENDIENTE]: 'Pendiente',
+  [PurchaseStatus.CONFIRMADO]: 'Confirmado',
+  [PurchaseStatus.PROGRAMADO]: 'Programado',
+  [PurchaseStatus.RECIBIDO]: 'Recibido',
+};

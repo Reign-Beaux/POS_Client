@@ -1,13 +1,15 @@
 import { Button, Grid } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { usePurchaseDetailContext } from "../../context";
+import { useDialogConfirm } from "common/custom-hooks";
 
 export type PurchaseDetailActionButtonsProps = {};
 
 const PurchaseDetailActionButtons: React.FC<PurchaseDetailActionButtonsProps> = () => {
   const navigate = useNavigate();
   const { setIsOpenDialog, setTitleDialog } = usePurchaseDetailContext();
+  const { showDialogConfirm } = useDialogConfirm();
 
   const returnPurchase = () => navigate(`/purchases`);
 
@@ -15,6 +17,12 @@ const PurchaseDetailActionButtons: React.FC<PurchaseDetailActionButtonsProps> = 
     setTitleDialog("Agregar partida");
     setIsOpenDialog(true);
   };
+
+  const confirmPurchase = () => {
+    console.log("Callback ejecutandose");
+  }
+
+  const handleShowConfirmDialog = () => showDialogConfirm("¿Desea confirmar la compra?", confirmPurchase);
 
   return (
     <Grid container spacing={1} style={{ marginBottom: "8px" }}>
@@ -25,8 +33,11 @@ const PurchaseDetailActionButtons: React.FC<PurchaseDetailActionButtonsProps> = 
       </Grid>
       <Grid item xs={10}>
         <div style={{ textAlign: "end" }}>
-          <Button variant="contained" color="secondary" onClick={handleShowDialog}>
+          <Button variant="contained" color="secondary" sx={{mr: 1}} onClick={handleShowDialog}>
             Agregar partida
+          </Button>
+          <Button variant="contained" color="secondary" onClick={handleShowConfirmDialog}>
+            Confirmar compra
           </Button>
         </div>
       </Grid>

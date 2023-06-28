@@ -6,6 +6,7 @@ export interface Purchase {
   taxes: number;
   total: number;
   orderDate: Date;
+  status: number;
 }
 
 export const purchaseEmpty: Purchase = {
@@ -16,4 +17,5 @@ export const purchaseEmpty: Purchase = {
   taxes: 0,
   total: 0,
   orderDate: new Date(),
+  status: 0,
 };
