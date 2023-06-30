@@ -1,5 +1,5 @@
 import { POSDataGrid } from "common/components";
-import { useAxios, useDialogConfirm } from "common/custom-hooks";
+import { useAxios } from "common/custom-hooks";
 import { PurchaseDetailDTO } from "common/dtos";
 import React, { useEffect, useState } from "react";
 import { usePurchaseDetailContext } from "../../context";
@@ -8,7 +8,7 @@ import { useColumnsPurchaseDetail } from "./custom-hooks";
 export type PurchaseDetailDataGridProps = {};
 
 const PurchaseDetailDataGrid: React.FC<PurchaseDetailDataGridProps> = () => {
-  const { isGridLoading, setIsGridLoading, idSelected, setIdSelected, purchaseId } =
+  const { isGridLoading, setIsGridLoading, purchaseId } =
     usePurchaseDetailContext();
   const { getAll, remove } = useAxios("PurchaseDetails");
   const [purchaseDetails, setPurchaseDetails] = useState<PurchaseDetailDTO[]>([]);
