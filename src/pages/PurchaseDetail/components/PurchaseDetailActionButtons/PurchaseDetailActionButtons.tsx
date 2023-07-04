@@ -1,15 +1,17 @@
 import { Button, Grid } from "@mui/material";
-import { useDialogConfirm } from "common/custom-hooks";
+import { useAxios, useDialogConfirm } from "common/custom-hooks";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { usePurchaseDetailContext } from "../../context";
+import { PurchaseStatus } from "@/common/consts";
 
 export type PurchaseDetailActionButtonsProps = {};
 
 const PurchaseDetailActionButtons: React.FC<PurchaseDetailActionButtonsProps> = () => {
   const navigate = useNavigate();
-  const { setIsOpenDialog, setTitleDialog } = usePurchaseDetailContext();
+  const { setIsOpenDialog, setTitleDialog, purchaseId } = usePurchaseDetailContext();
   const { showDialogConfirm } = useDialogConfirm();
+  const { update } = useAxios("Purchases");
 
   const returnPurchase = () => navigate(`/purchases`);
 
@@ -18,11 +20,18 @@ const PurchaseDetailActionButtons: React.FC<PurchaseDetailActionButtonsProps> = 
     setIsOpenDialog(true);
   };
 
-  const confirmPurchase = () => {
-    console.log("Callback ejecutandose");
-  }
+  const confirmPurchase = async () => {
+    const response = await update<{}>(
+      {},
+      `UpdateStatus/${purchaseId}/${PurchaseStatus.CONFIRMADO}`
+    );
+    if (!response.success) return;
 
-  const handleShowConfirmDialog = () => showDialogConfirm("¿Desea confirmar la compra?", confirmPurchase);
+    returnPurchase();
+  };
+
+  const handleShowConfirmDialog = () =>
+    showDialogConfirm("¿Desea confirmar la compra?", confirmPurchase);
 
   return (
     <Grid container spacing={1} style={{ marginBottom: "8px" }}>
@@ -33,7 +42,7 @@ const PurchaseDetailActionButtons: React.FC<PurchaseDetailActionButtonsProps> = 
       </Grid>
       <Grid item xs={10}>
         <div style={{ textAlign: "end" }}>
-          <Button variant="contained" color="secondary" sx={{mr: 1}} onClick={handleShowDialog}>
+          <Button variant="contained" color="secondary" sx={{ mr: 1 }} onClick={handleShowDialog}>
             Agregar partida
           </Button>
           <Button variant="contained" color="secondary" onClick={handleShowConfirmDialog}>
