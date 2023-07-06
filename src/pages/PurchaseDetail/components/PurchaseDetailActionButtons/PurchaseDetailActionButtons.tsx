@@ -1,9 +1,9 @@
 import { Button, Grid } from "@mui/material";
+import { APIControllers, PurchaseStatus } from "common/consts";
 import { useAxios, useDialogConfirm } from "common/custom-hooks";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { usePurchaseDetailContext } from "../../context";
-import { PurchaseStatus } from "@/common/consts";
 
 export type PurchaseDetailActionButtonsProps = {};
 
@@ -11,7 +11,7 @@ const PurchaseDetailActionButtons: React.FC<PurchaseDetailActionButtonsProps> = 
   const navigate = useNavigate();
   const { setIsOpenDialog, setTitleDialog, purchaseId } = usePurchaseDetailContext();
   const { showDialogConfirm } = useDialogConfirm();
-  const { update } = useAxios("Purchases");
+  const { update } = useAxios(APIControllers.PURCHASES);
 
   const returnPurchase = () => navigate(`/purchases`);
 

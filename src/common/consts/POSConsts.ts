@@ -4,6 +4,26 @@
 export type UserRoles = "admin" | "sales" | "purchases" | "inventory";
 
 /**
+ * Controladores del API
+ */
+
+export enum APIControllers {
+  AREAS = "Areas",
+  ARTICLES = "Articles",
+  ARTICLES_TYPES = "ArticlesTypes",
+  BRANDS = "Brands",
+  EMPLOYEES = "Employees",
+  INVENTORIES = "Inventories",
+  LOGIN = "Login",
+  PURCHASE_DETAILS = "PurchaseDetails",  
+  PURCHASES = "Purchases", 
+  ROLES = "Roles",
+  SELECTS = "Selects",
+  SUPPLIERS = "Suppliers",
+  USERS = "Users",
+}
+
+/**
  * Colores de alerta.
  */
 export enum AlertColors {

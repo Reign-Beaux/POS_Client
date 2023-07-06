@@ -8,7 +8,7 @@ import {
   POSSelect,
   POSTextField
 } from "common/components";
-import { emailRegex } from "common/consts";
+import { APIControllers, emailRegex } from "common/consts";
 import { useAxios } from "common/custom-hooks";
 import { SelectDTO } from "common/dtos";
 import { User, userEmpty } from "common/models";
@@ -33,7 +33,7 @@ const UserDialog: React.FC<UserDialogProps> = () => {
     idSelected,
     setIdSelected,
   } = useUserContext();
-  const { post, update, getById } = useAxios("Users");
+  const { post, update, getById } = useAxios(APIControllers.USERS);
   const { selects } = useAxios();
   const [employees, setEmployees] = useState<SelectDTO[]>([]);
   const [roles, setRoles] = useState<SelectDTO[]>([]);

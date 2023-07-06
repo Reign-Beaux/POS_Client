@@ -2,7 +2,7 @@ import SaveIcon from "@mui/icons-material/Save";
 import { DialogActions, DialogContent } from "@mui/material";
 import { Box } from "@mui/system";
 import { POSButton, POSDialog, POSDialogHeader, POSSelect, POSTextField } from "common/components";
-import { emailRegex } from "common/consts";
+import { APIControllers, emailRegex } from "common/consts";
 import { useAxios } from "common/custom-hooks";
 import { SelectDTO } from "common/dtos";
 import { Supplier, supplierEmpty } from "common/models";
@@ -25,7 +25,7 @@ const SupplierDialog: React.FC<SupplierDialogProps> = () => {
     idSelected,
     setIdSelected,
   } = useSupplierContext();
-  const { post, update, getById } = useAxios("Suppliers");
+  const { post, update, getById } = useAxios(APIControllers.SUPPLIERS);
   const { selects } = useAxios();
   const [brands, setBrands] = useState<SelectDTO[]>([]);
 

@@ -2,6 +2,7 @@ import SaveIcon from "@mui/icons-material/Save";
 import { DialogActions, DialogContent } from "@mui/material";
 import { Box } from "@mui/system";
 import { POSButton, POSDialog, POSDialogHeader, POSTextField } from "common/components";
+import { APIControllers } from "common/consts";
 import { useAxios } from "common/custom-hooks";
 import { Brand, brandEmpty } from "common/models";
 import { useFormik } from "formik";
@@ -23,7 +24,7 @@ const BrandDialog: React.FC<BrandDialogProps> = () => {
     idSelected,
     setIdSelected,
   } = useBrandContext();
-  const { post, update, getById } = useAxios("Brands");
+  const { post, update, getById } = useAxios(APIControllers.BRANDS);
 
   const handleSubmit = async (values: FormValues) => {
     const response = !values.id ? await post<Brand>(values) : await update<Brand>(values);

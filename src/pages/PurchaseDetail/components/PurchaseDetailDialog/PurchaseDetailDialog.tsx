@@ -2,6 +2,7 @@ import SaveIcon from "@mui/icons-material/Save";
 import { DialogActions, DialogContent } from "@mui/material";
 import { Box } from "@mui/system";
 import { POSButton, POSDialog, POSDialogHeader, POSSelect, POSTextField } from "common/components";
+import { APIControllers } from "common/consts";
 import { useAxios } from "common/custom-hooks";
 import { SelectDTO } from "common/dtos";
 import { PurchaseDetail, purchaseDetailEmpty } from "common/models";
@@ -25,7 +26,7 @@ const PurchaseDetailDialog: React.FC<PurchaseDetailDialogProps> = () => {
     setIdSelected,
     purchaseId,
   } = usePurchaseDetailContext();
-  const { post, update, getById } = useAxios("PurchaseDetails");
+  const { post, update, getById } = useAxios(APIControllers.PURCHASE_DETAILS);
   const { selects } = useAxios();
   const [articles, setArticles] = useState<SelectDTO[]>([]);
   const initialValues: FormValues = { ...purchaseDetailEmpty, purchaseId };

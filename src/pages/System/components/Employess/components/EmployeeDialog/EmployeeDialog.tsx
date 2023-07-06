@@ -1,6 +1,7 @@
 import SaveIcon from "@mui/icons-material/Save";
 import { Box, DialogActions, DialogContent } from "@mui/material";
 import { POSButton, POSDialog, POSDialogHeader, POSSelect, POSTextField } from "common/components";
+import { APIControllers } from "common/consts";
 import { useAxios } from "common/custom-hooks";
 import { SelectDTO } from "common/dtos";
 import { Employee, employeeEmpty } from "common/models";
@@ -23,7 +24,7 @@ const EmployeeDialog: React.FC<EmployeeDialogProps> = () => {
     idSelected,
     setIdSelected,
   } = useEmployeesContext();
-  const { post, update, getById } = useAxios("Employees");
+  const { post, update, getById } = useAxios(APIControllers.EMPLOYEES);
   const { selects } = useAxios();
   const [areas, setAreas] = useState<SelectDTO[]>([]);
 
@@ -82,11 +83,7 @@ const EmployeeDialog: React.FC<EmployeeDialogProps> = () => {
           <POSSelect keyFormik="areaId" label="Área" formik={formik} datas={areas} />
         </DialogContent>
         <DialogActions>
-          <POSButton
-            type="submit"
-            disabled={formik.isSubmitting}
-            isLoading={formik.isSubmitting}
-          >
+          <POSButton type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
             <SaveIcon /> Guardar
           </POSButton>
         </DialogActions>

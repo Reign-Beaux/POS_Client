@@ -3,6 +3,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { IconButton, Tooltip } from "@mui/material";
 import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import { POSDataGrid } from "common/components";
+import { APIControllers } from "common/consts";
 import { useAxios, useDialogConfirm } from "common/custom-hooks";
 import { SupplierDTO } from "common/dtos";
 import React, { useEffect, useState } from "react";
@@ -19,7 +20,7 @@ const SupplierDataGrid: React.FC<SupplierDataGridProps> = () => {
     idSelected,
     setIdSelected,
   } = useSupplierContext();
-  const { getAll, remove } = useAxios("Suppliers");
+  const { getAll, remove } = useAxios(APIControllers.SUPPLIERS);
   const { showDialogConfirm } = useDialogConfirm();
   const [suppliers, setSuppliers] = useState<SupplierDTO[]>([]);
 

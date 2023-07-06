@@ -3,6 +3,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { IconButton, Tooltip } from "@mui/material";
 import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import { POSDataGrid } from "common/components";
+import { APIControllers } from "common/consts";
 import { useAxios, useDialogConfirm } from "common/custom-hooks";
 import { ArticleType } from "common/models";
 import React, { useEffect, useState } from "react";
@@ -11,15 +12,9 @@ import { useArticlesTypesContext } from "../../context";
 export type ArticlesTypesDatagridProps = {};
 
 const ArticlesTypesDatagrid: React.FC<ArticlesTypesDatagridProps> = () => {
-  const {
-    setIsOpenDialog,
-    setTitleDialog,
-    isGridLoading,
-    setIsGridLoading,
-    idSelected,
-    setIdSelected,
-  } = useArticlesTypesContext();
-  const { getAll, remove } = useAxios("ArticlesTypes");
+  const { setIsOpenDialog, setTitleDialog, isGridLoading, setIsGridLoading, setIdSelected } =
+    useArticlesTypesContext();
+  const { getAll, remove } = useAxios(APIControllers.ARTICLES_TYPES);
   const { showDialogConfirm } = useDialogConfirm();
   const [articlesTypes, setArticlesTypes] = useState<ArticleType[]>([]);
 

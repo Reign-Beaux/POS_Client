@@ -4,6 +4,7 @@ import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import { IconButton, Tooltip } from "@mui/material";
 import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import { POSDataGrid } from "common/components";
+import { APIControllers } from "common/consts";
 import { useAxios, useDialogConfirm } from "common/custom-hooks";
 import { Role } from "common/models";
 import React, { useEffect, useState } from "react";
@@ -18,10 +19,9 @@ const RoleDataGrid: React.FC<RoleDataGridProps> = () => {
     setTitleDialog,
     isGridLoading,
     setIsGridLoading,
-    idSelected,
     setIdSelected,
   } = useRoleContext();
-  const { getAll, remove } = useAxios("Roles");
+  const { getAll, remove } = useAxios(APIControllers.ROLES);
   const { showDialogConfirm } = useDialogConfirm();
   const [roles, setRoles] = useState<Role[]>([]);
 

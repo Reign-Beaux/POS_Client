@@ -1,10 +1,11 @@
-import { UserDTO } from "common/dtos";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { IconButton, Tooltip } from "@mui/material";
 import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import { POSDataGrid } from "common/components";
+import { APIControllers } from "common/consts";
 import { useAxios, useDialogConfirm } from "common/custom-hooks";
+import { UserDTO } from "common/dtos";
 import React, { useEffect, useState } from "react";
 import { useUserContext } from "../../context";
 
@@ -19,7 +20,7 @@ const UserDataGrid: React.FC<UserDataGridProps> = () => {
     idSelected,
     setIdSelected,
   } = useUserContext();
-  const { getAll, remove } = useAxios("Users");
+  const { getAll, remove } = useAxios(APIControllers.USERS);
   const { showDialogConfirm } = useDialogConfirm();
   const [users, setUsers] = useState<UserDTO[]>([]);
 

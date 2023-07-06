@@ -3,6 +3,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Checkbox, IconButton, Tooltip } from "@mui/material";
 import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import { POSDataGrid } from "common/components";
+import { APIControllers } from "common/consts";
 import { useAxios, useDialogConfirm } from "common/custom-hooks";
 import { ArticleDTO } from "common/dtos";
 import React, { useEffect, useState } from "react";
@@ -19,7 +20,7 @@ const ArticlesDataGrid: React.FC<ArticlesDataGridProps> = () => {
     idSelected,
     setIdSelected,
   } = useArticlesContext();
-  const { getAll, remove } = useAxios("Articles");
+  const { getAll, remove } = useAxios(APIControllers.ARTICLES);
   const { showDialogConfirm } = useDialogConfirm();
   const [articles, setArticles] = useState<ArticleDTO[]>([]);
 

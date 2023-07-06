@@ -3,6 +3,7 @@ import { parseJwt } from "@/utilities";
 import SaveIcon from "@mui/icons-material/Save";
 import { Box, DialogActions, DialogContent } from "@mui/material";
 import { POSButton, POSDialog, POSDialogHeader, POSSelect } from "common/components";
+import { APIControllers } from "common/consts";
 import { useAxios } from "common/custom-hooks";
 import { PurchaseRequestDTO, SelectDTO, purchaseRequestDTOEmpty } from "common/dtos";
 import { useFormik } from "formik";
@@ -28,14 +29,16 @@ const PurchasingProcessDialog: React.FC<PurchasingProcessDialogProps> = () => {
     setIdSelected,
   } = usePurchasingProcessContext();
   const { token } = useSelector((store: POSReducer) => store.session);
-  const { post, update, getById } = useAxios("Purchases");
+  const { post, update, getById } = useAxios(APIControllers.PURCHASES);
   const { selects } = useAxios();
   const [suppliers, setSuppliers] = useState<SelectDTO[]>([]);
   const [userName, setUserName] = useState<string>("");
 
   const handleSubmit = async (values: FormValues) => {
-    const data = { ...values,  userName: userName };
-    const response = !values.id ? await post<PurchaseRequestDTO>(data) : await update<PurchaseRequestDTO>(data);
+    const data = { ...values, userName: userName };
+    const response = !values.id
+      ? await post<PurchaseRequestDTO>(data)
+      : await update<PurchaseRequestDTO>(data);
     if (!response.success) return;
 
     setIsGridLoading(true);
@@ -65,7 +68,7 @@ const PurchasingProcessDialog: React.FC<PurchasingProcessDialogProps> = () => {
 
   useEffect(() => {
     const userClaim = parseJwt(token);
-    setUserName(userClaim.FullName)
+    setUserName(userClaim.FullName);
   }, []);
 
   useEffect(() => {
@@ -82,7 +85,7 @@ const PurchasingProcessDialog: React.FC<PurchasingProcessDialogProps> = () => {
 
   return (
     <POSDialog open={isOpenDialog}>
-			<POSDialogHeader titleDialog={titleDialog} setIsOpenDialog={setIsOpenDialog} />
+      <POSDialogHeader titleDialog={titleDialog} setIsOpenDialog={setIsOpenDialog} />
       <Box component="form" onSubmit={formik.handleSubmit}>
         <DialogContent>
           <POSSelect keyFormik="supplierId" label="Proveedor" formik={formik} datas={suppliers} />

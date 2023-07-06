@@ -2,6 +2,7 @@ import SaveIcon from "@mui/icons-material/Save";
 import { DialogActions, DialogContent } from "@mui/material";
 import { Box } from "@mui/system";
 import { POSButton, POSDialog, POSDialogHeader, POSTextField } from "common/components";
+import { APIControllers } from "common/consts";
 import { useAxios } from "common/custom-hooks";
 import { ArticleType, articleTypeEmpty } from "common/models";
 import { useFormik } from "formik";
@@ -23,7 +24,7 @@ const ArticlesTypesDialog: React.FC<ArticlesTypesDialogProps> = () => {
     idSelected,
     setIdSelected,
   } = useArticlesTypesContext();
-  const { post, update, getById } = useAxios("ArticlesTypes");
+  const { post, update, getById } = useAxios(APIControllers.ARTICLES_TYPES);
 
   const handleSubmit = async (values: FormValues) => {
     const response = !values.id

@@ -1,13 +1,14 @@
+import { GridColDef } from "@mui/x-data-grid";
 import { POSDataGrid } from "common/components";
+import { APIControllers } from "common/consts";
 import { useAxios } from "common/custom-hooks";
 import { InventoryDTO } from "common/dtos";
-import { GridColDef } from "@mui/x-data-grid";
 import React, { useEffect, useState } from "react";
 
 export type InventoryDetailDataGridProps = {};
 
 const InventoryDetailDataGrid: React.FC<InventoryDetailDataGridProps> = () => {
-  const { getAll } = useAxios("Inventories");
+  const { getAll } = useAxios(APIControllers.INVENTORIES);
   const [inventory, setInventory] = useState<InventoryDTO[]>([]);
 
   const getInventoryDetail = async () => {

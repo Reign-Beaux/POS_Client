@@ -1,15 +1,15 @@
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { IconButton, Tooltip } from '@mui/material';
-import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
-import { POSDataGrid } from 'common/components';
-import { useAxios, useDialogConfirm } from 'common/custom-hooks';
-import { Brand } from 'common/models';
-import React, { useEffect, useState } from 'react';
-import { useBrandContext } from '../../context';
+import { IconButton, Tooltip } from "@mui/material";
+import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
+import { POSDataGrid } from "common/components";
+import { APIControllers } from "common/consts";
+import { useAxios, useDialogConfirm } from "common/custom-hooks";
+import { Brand } from "common/models";
+import React, { useEffect, useState } from "react";
+import { useBrandContext } from "../../context";
 
-export type BrandDataGridProps = {
-}
+export type BrandDataGridProps = {};
 
 const BrandDataGrid: React.FC<BrandDataGridProps> = () => {
   const {
@@ -20,7 +20,7 @@ const BrandDataGrid: React.FC<BrandDataGridProps> = () => {
     idSelected,
     setIdSelected,
   } = useBrandContext();
-  const { getAll, remove } = useAxios("Brands");
+  const { getAll, remove } = useAxios(APIControllers.BRANDS);
   const { showDialogConfirm } = useDialogConfirm();
   const [brands, setBrands] = useState<Brand[]>([]);
 
@@ -46,7 +46,7 @@ const BrandDataGrid: React.FC<BrandDataGridProps> = () => {
 
   const handleShowConfirmDialog = (id: number) =>
     showDialogConfirm("¿Desea eliminar el registro?", () => handleRemove(id));
-	
+
   const columns: GridColDef[] = [
     {
       field: "code",
@@ -76,16 +76,14 @@ const BrandDataGrid: React.FC<BrandDataGridProps> = () => {
           <Tooltip title="Actualizar área">
             <IconButton
               aria-label="update-student"
-              onClick={() => handleShowDialogToUpdate(params.row.id)}
-            >
+              onClick={() => handleShowDialogToUpdate(params.row.id)}>
               <EditIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="Eliminar área">
             <IconButton
               aria-label="delete-subject"
-              onClick={() => handleShowConfirmDialog(params.row.id)}
-            >
+              onClick={() => handleShowConfirmDialog(params.row.id)}>
               <DeleteIcon />
             </IconButton>
           </Tooltip>
@@ -99,7 +97,7 @@ const BrandDataGrid: React.FC<BrandDataGridProps> = () => {
 
     getBrands();
   }, [isGridLoading]);
-  
+
   return <POSDataGrid dataSource={brands} columns={columns} />;
 };
 

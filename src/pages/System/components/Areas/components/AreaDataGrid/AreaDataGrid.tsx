@@ -1,4 +1,5 @@
 import { POSDataGrid } from "common/components";
+import { APIControllers } from "common/consts";
 import { useAxios } from "common/custom-hooks";
 import { Area } from "common/models";
 import React, { useEffect, useState } from "react";
@@ -8,13 +9,8 @@ import { useColumsArea } from "./custom-hooks";
 export type AreaDataGridProps = {};
 
 const AreaDataGrid: React.FC<AreaDataGridProps> = () => {
-  const {
-    isGridLoading,
-    setIsGridLoading,
-    idSelected,
-    setIdSelected,
-  } = useAreaContext();
-  const { getAll, remove } = useAxios("Areas");
+  const { isGridLoading, setIsGridLoading } = useAreaContext();
+  const { getAll, remove } = useAxios(APIControllers.AREAS);
   const [areas, setAreas] = useState<Area[]>([]);
 
   const getAreas = async () => {

@@ -9,6 +9,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { POSDarkModeButton, POSLink, POSPassField, POSTextField } from "common/components";
+import { APIControllers } from "common/consts";
 import { useAxios } from "common/custom-hooks";
 import { LoginDTO, loginDTOEmpty } from "common/dtos";
 import { useFormik } from "formik";
@@ -27,7 +28,7 @@ const Login: React.FC<LoginProps> = () => {
   const theme = useTheme();
   const dispatcher = useDispatch();
   const navigate = useNavigate();
-  const { login } = useAxios("Login");
+  const { login } = useAxios(APIControllers.LOGIN);
 
   const handleSubmit = async (values: FormValues) => {
     const response = await login(values);

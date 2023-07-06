@@ -1,5 +1,6 @@
 import { POSDataGrid } from "common/components";
-import { useAxios, useDialogConfirm } from "common/custom-hooks";
+import { APIControllers } from "common/consts";
+import { useAxios } from "common/custom-hooks";
 import { EmployeeDTO } from "common/dtos";
 import React, { useEffect, useState } from "react";
 import { useEmployeesContext } from "../../context";
@@ -8,13 +9,8 @@ import { useColumnsEmployees } from "./custom-hooks";
 export type EmployeesDataGridProps = {};
 
 const EmployeesDataGrid: React.FC<EmployeesDataGridProps> = () => {
-  const {
-    isGridLoading,
-    setIsGridLoading,
-    idSelected,
-    setIdSelected,
-  } = useEmployeesContext();
-  const { getAll, remove } = useAxios("Employees");
+  const { isGridLoading, setIsGridLoading } = useEmployeesContext();
+  const { getAll, remove } = useAxios(APIControllers.EMPLOYEES);
   const [employees, setEmployees] = useState<EmployeeDTO[]>([]);
 
   const getEmployees = async () => {
@@ -38,7 +34,7 @@ const EmployeesDataGrid: React.FC<EmployeesDataGridProps> = () => {
 
     getEmployees();
   }, [isGridLoading]);
-  
+
   return <POSDataGrid dataSource={employees} columns={columns()} />;
 };
 

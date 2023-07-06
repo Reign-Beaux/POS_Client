@@ -7,8 +7,9 @@ import {
   POSDialog,
   POSDialogHeader,
   POSSelect,
-  POSTextField
+  POSTextField,
 } from "common/components";
+import { APIControllers } from "common/consts";
 import { useAxios } from "common/custom-hooks";
 import { SelectDTO } from "common/dtos";
 import { Article, articleEmpty } from "common/models";
@@ -31,7 +32,7 @@ const ArticlesDialog: React.FC<ArticlesDialogProps> = () => {
     idSelected,
     setIdSelected,
   } = useArticlesContext();
-  const { post, update, getById } = useAxios("Articles");
+  const { post, update, getById } = useAxios(APIControllers.ARTICLES);
   const { selects } = useAxios();
   const [articleType, setArticleType] = useState<SelectDTO[]>([]);
 

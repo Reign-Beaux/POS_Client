@@ -4,12 +4,12 @@ import PostAddIcon from "@mui/icons-material/PostAdd";
 import { IconButton, Tooltip } from "@mui/material";
 import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import { POSDataGrid } from "common/components";
+import { APIControllers, PurchaseStatusTexts } from "common/consts";
 import { useAxios, useDialogConfirm } from "common/custom-hooks";
 import { PurchaseDTO } from "common/dtos";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { usePurchasingProcessContext } from "../../context";
-import { PurchaseStatusTexts } from "common/consts";
 
 export type PurchasingProcessDataGridProps = {};
 
@@ -17,7 +17,7 @@ const PurchasingProcessDataGrid: React.FC<PurchasingProcessDataGridProps> = () =
   const { setIsOpenDialog, setTitleDialog, isGridLoading, setIsGridLoading, setIdSelected } =
     usePurchasingProcessContext();
   const navigate = useNavigate();
-  const { getAll, remove } = useAxios("Purchases");
+  const { getAll, remove } = useAxios(APIControllers.PURCHASES);
   const { showDialogConfirm } = useDialogConfirm();
   const [purchases, setPurchases] = useState<PurchaseDTO[]>([]);
 
@@ -88,7 +88,7 @@ const PurchasingProcessDataGrid: React.FC<PurchasingProcessDataGridProps> = () =
       flex: 1,
       minWidth: 150,
       editable: false,
-      renderCell: (params: GridRenderCellParams) => <>{ PurchaseStatusTexts[params.row.status] }</>,
+      renderCell: (params: GridRenderCellParams) => <>{PurchaseStatusTexts[params.row.status]}</>,
     },
     {
       field: "actions",

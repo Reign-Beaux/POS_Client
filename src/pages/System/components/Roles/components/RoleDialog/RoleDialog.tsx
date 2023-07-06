@@ -2,6 +2,7 @@ import SaveIcon from "@mui/icons-material/Save";
 import { DialogActions, DialogContent } from "@mui/material";
 import { Box } from "@mui/system";
 import { POSButton, POSDialog, POSDialogHeader, POSTextField } from "common/components";
+import { APIControllers } from "common/consts";
 import { useAxios } from "common/custom-hooks";
 import { Role, roleEmpty } from "common/models";
 import { useFormik } from "formik";
@@ -23,7 +24,7 @@ const RoleDialog: React.FC<RoleDialogProps> = () => {
     idSelected,
     setIdSelected,
   } = useRoleContext();
-  const { post, update, getById } = useAxios("Roles");
+  const { post, update, getById } = useAxios(APIControllers.ROLES);
 
   const handleSubmit = async (values: FormValues) => {
     const response = !values.id ? await post<Role>(values) : await update<Role>(values);
@@ -69,11 +70,7 @@ const RoleDialog: React.FC<RoleDialogProps> = () => {
           <POSTextField keyFormik="description" label="Descripción" formik={formik} />
         </DialogContent>
         <DialogActions>
-          <POSButton
-            type="submit"
-            disabled={formik.isSubmitting}
-            isLoading={formik.isSubmitting}
-          >
+          <POSButton type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
             <SaveIcon /> Guardar
           </POSButton>
         </DialogActions>

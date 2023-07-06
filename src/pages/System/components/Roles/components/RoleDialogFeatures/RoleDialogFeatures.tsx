@@ -1,16 +1,16 @@
 import SaveIcon from "@mui/icons-material/Save";
 import { DialogActions, DialogContent } from "@mui/material";
 import { POSButton, POSDialog, POSDialogHeader, POSTransferList } from "common/components";
+import { APIControllers } from "common/consts";
 import { useAxios } from "common/custom-hooks";
 import { SelectDTO } from "common/dtos";
 import React, { useEffect, useState } from "react";
 import { useRoleContext } from "../../context";
-import { Role_Features } from "common/models";
 
 export type RoleDialogFeaturesProps = {};
 
 const RoleDialogFeatures: React.FC<RoleDialogFeaturesProps> = () => {
-  const { selects, post } = useAxios("Roles");
+  const { selects, post } = useAxios(APIControllers.ROLES);
   const { isOpenDialogFeatures, setIsOpenDialogFeatures, titleDialog, idSelected } =
     useRoleContext();
 

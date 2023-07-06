@@ -2,6 +2,7 @@ import SaveIcon from "@mui/icons-material/Save";
 import { DialogActions, DialogContent } from "@mui/material";
 import { Box } from "@mui/system";
 import { POSButton, POSDialog, POSDialogHeader, POSTextField } from "common/components";
+import { APIControllers } from "common/consts";
 import { useAxios } from "common/custom-hooks";
 import { Area, areaEmpty } from "common/models";
 import { useFormik } from "formik";
@@ -23,7 +24,7 @@ const AreaDialog: React.FC<AreaDialogProps> = () => {
     idSelected,
     setIdSelected,
   } = useAreaContext();
-  const { post, update, getById } = useAxios("Areas");
+  const { post, update, getById } = useAxios(APIControllers.AREAS);
 
   const handleSubmit = async (values: FormValues) => {
     const response = !values.id ? await post<Area>(values) : await update<Area>(values);
@@ -69,11 +70,7 @@ const AreaDialog: React.FC<AreaDialogProps> = () => {
           <POSTextField keyFormik="description" label="Descripción" formik={formik} />
         </DialogContent>
         <DialogActions>
-          <POSButton
-            type="submit"
-            disabled={formik.isSubmitting}
-            isLoading={formik.isSubmitting}
-          >
+          <POSButton type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
             <SaveIcon /> Guardar
           </POSButton>
         </DialogActions>
