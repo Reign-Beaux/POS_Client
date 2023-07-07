@@ -2,8 +2,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { IconButton, Tooltip } from "@mui/material";
 import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
-import { usePurchaseDetailContext } from "../../../context";
 import { useDialogConfirm } from "common/custom-hooks";
+import { usePurchaseDetailContext } from "../../../context";
 
 const useColumnsPurchaseDetail = (handleRemove: Function) => {
   const { setIsOpenDialog, setTitleDialog, setIdSelected } = usePurchaseDetailContext();
@@ -16,7 +16,7 @@ const useColumnsPurchaseDetail = (handleRemove: Function) => {
   };
 
   const handleShowConfirmDialog = (id: number) =>
-    showDialogConfirm("¿Desea eliminar el registro?", handleRemove(id));
+    showDialogConfirm("¿Desea eliminar el registro?", () => handleRemove(id));
 
   const columns = (): GridColDef[] => {
     return [
