@@ -9,7 +9,8 @@ export type PurchaseDetailActionButtonsProps = {};
 
 const PurchaseDetailActionButtons: React.FC<PurchaseDetailActionButtonsProps> = () => {
   const navigate = useNavigate();
-  const { setIsOpenDialog, setTitleDialog, purchaseId } = usePurchaseDetailContext();
+  const { setIsOpenDialog, setTitleDialog, setIsGridLoading, numberOfRecords, purchaseId } =
+    usePurchaseDetailContext();
   const { showDialogConfirm } = useDialogConfirm();
   const { update } = useAxios(APIControllers.PURCHASES);
 
@@ -25,7 +26,10 @@ const PurchaseDetailActionButtons: React.FC<PurchaseDetailActionButtonsProps> = 
       {},
       `UpdateStatus/${purchaseId}/${PurchaseStatus.CONFIRMADO}`
     );
-    if (!response.success) return;
+    if (!response.success) {
+      setIsGridLoading(true);
+      return;
+    }
 
     returnPurchase();
   };
@@ -45,9 +49,11 @@ const PurchaseDetailActionButtons: React.FC<PurchaseDetailActionButtonsProps> = 
           <Button variant="contained" color="secondary" sx={{ mr: 1 }} onClick={handleShowDialog}>
             Agregar partida
           </Button>
-          <Button variant="contained" color="secondary" onClick={handleShowConfirmDialog}>
-            Confirmar compra
-          </Button>
+          {numberOfRecords > 0 && (
+            <Button variant="contained" color="secondary" onClick={handleShowConfirmDialog}>
+              Confirmar compra
+            </Button>
+          )}
         </div>
       </Grid>
     </Grid>

@@ -14,6 +14,8 @@ type ContextProps = {
   setIsGridLoading: Function;
   idSelected: number;
   setIdSelected: Function;
+  numberOfRecords: number;
+  setNumberOfRecords: Function;
   purchaseId: number;
 };
 
@@ -26,6 +28,8 @@ const ContextEmptyState: ContextProps = {
   setIsGridLoading: () => {},
   idSelected: 0,
   setIdSelected: () => {},
+  numberOfRecords: 0,
+  setNumberOfRecords: () => {},
   purchaseId: 0
 };
 
@@ -36,6 +40,7 @@ export const PurchaseDetailProvider: React.FC<PurchaseDetailProviderProps> = ({ 
   const [isOpenDialog, setIsOpenDialog] = useState<boolean>(false);
   const [titleDialog, setTitleDialog] = useState<string>("");
   const [isGridLoading, setIsGridLoading] = useState<boolean>(true);
+  const [numberOfRecords, setNumberOfRecords] = useState<number>(0);
   const [idSelected, setIdSelected] = useState<number>(0);
 
   return (
@@ -49,6 +54,8 @@ export const PurchaseDetailProvider: React.FC<PurchaseDetailProviderProps> = ({ 
         setIsGridLoading: setIsGridLoading,
         idSelected: idSelected,
         setIdSelected: setIdSelected,
+        numberOfRecords: numberOfRecords,
+        setNumberOfRecords: setNumberOfRecords,
         purchaseId: Number(id)
       }}
     >

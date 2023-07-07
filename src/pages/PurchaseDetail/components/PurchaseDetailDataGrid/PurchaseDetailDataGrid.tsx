@@ -9,12 +9,13 @@ import { useColumnsPurchaseDetail } from "./custom-hooks";
 export type PurchaseDetailDataGridProps = {};
 
 const PurchaseDetailDataGrid: React.FC<PurchaseDetailDataGridProps> = () => {
-  const { isGridLoading, setIsGridLoading, purchaseId } = usePurchaseDetailContext();
+  const { isGridLoading, setIsGridLoading, setNumberOfRecords, purchaseId } = usePurchaseDetailContext();
   const { getAll, remove } = useAxios(APIControllers.PURCHASE_DETAILS);
   const [purchaseDetails, setPurchaseDetails] = useState<PurchaseDetailDTO[]>([]);
 
   const getPurchaseDetails = async () => {
     const result = await getAll<PurchaseDetailDTO>(`GetPurchaseDetails/${purchaseId}`);
+    setNumberOfRecords(result.length);
     setPurchaseDetails(result);
     setIsGridLoading(false);
   };
