@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export interface GlobalSlice {
+interface GlobalSlice {
   selectedModule: number;
 }
 

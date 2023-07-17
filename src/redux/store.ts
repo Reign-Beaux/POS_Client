@@ -1,27 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import {
-  ConfigSlice,
-  ConfirmSlice,
-  GlobalSlice,
-  SessionSlice,
-  SnackbarSlice,
-  ThemeSlice,
   configSlice,
   confirmSlice,
   globaSlice,
   sessionSlice,
   snackbarSlice,
-  themeSlice,
+  themeSlice
 } from "./slices";
-
-export interface POSReducer {
-  config: ConfigSlice;
-  confirm: ConfirmSlice;
-  global: GlobalSlice;
-  session: SessionSlice;
-  snackbar: SnackbarSlice;
-  theme: ThemeSlice;
-}
 
 export const ConfigStore = configureStore({
   reducer: {
@@ -33,3 +19,10 @@ export const ConfigStore = configureStore({
     theme: themeSlice.reducer,
   },
 });
+
+type RootState = ReturnType<typeof ConfigStore.getState>;
+type AppDispatch = typeof ConfigStore.dispatch;
+
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+

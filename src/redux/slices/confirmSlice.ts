@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export interface ConfirmSlice {
+interface ConfirmSlice {
   isOpen: boolean;
   message: string;
   responseConfirmation: boolean | null;

@@ -2,7 +2,7 @@ import { AlertColors } from "common/consts";
 import { AlertColor } from "@mui/material";
 import { createSlice } from "@reduxjs/toolkit";
 
-export interface SnackbarSlice {
+interface SnackbarSlice {
   isOpen: boolean;
   severity: AlertColor;
   message: string;

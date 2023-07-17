@@ -1,7 +1,7 @@
 import { ApiConfig } from "@/utilities";
 import { createSlice } from "@reduxjs/toolkit";
 
-export interface ConfigSlice extends ApiConfig {}
+interface ConfigSlice extends ApiConfig {}
 
 const configEmptyState: ConfigSlice = {
   API_URL: "",
