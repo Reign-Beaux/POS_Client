@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
+import { PRDataGrid } from "./components";
 
-export type PurchaseReceptionProps = {
-}
+export type PurchaseReceptionProps = {};
 
 const PurchaseReception: React.FC<PurchaseReceptionProps> = () => {
-	return <div className='PurchaseReception'>PurchaseReception</div>;
+  return <PRDataGrid />;
 };
 
 export default PurchaseReception;
