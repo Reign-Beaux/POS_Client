@@ -1,7 +1,7 @@
 import { Feature } from "common/models";
 import { createSlice } from "@reduxjs/toolkit";
 
-interface SessionSlice {
+export interface SessionSlice {
   token: string;
   features: Feature[];
 }

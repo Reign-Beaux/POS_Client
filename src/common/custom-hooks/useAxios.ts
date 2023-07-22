@@ -1,8 +1,7 @@
-import { POSReducer } from "@/redux";
+import { useAppSelector } from "@/redux";
 import { SessionSlice } from "@/redux/slices";
 import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { AlertColors, SnackMessage } from "../consts";
 import { LoginDTO, SelectDTO } from "../dtos";
 import { POSTransactionResult } from "../models";
@@ -14,7 +13,7 @@ import useSnackbar from "./useSnackbar";
  * @param controller Nombre del controlador de la API (opcional).
  */
 const useAxios = (controller: string = "") => {
-  const { API_URL } = useSelector((store: POSReducer) => store.config);
+  const { API_URL } = useAppSelector((store) => store.config);
   const { showSnackbar } = useSnackbar();
   const [abortController, setAbortController] = useState<AbortController>(new AbortController());
 

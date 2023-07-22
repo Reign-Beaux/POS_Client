@@ -1,5 +1,4 @@
-import { POSReducer } from "@/redux";
-import { setResponse } from "@/redux/slices";
+import { useAppSelector } from "@/redux";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import {
@@ -13,8 +12,8 @@ import {
   Tooltip,
 } from "@mui/material";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { POSButton } from "../POSButton";
+import { useSetResult } from "./custom-hooks";
 
 export type POSConfirmationDialogProps = {};
 
@@ -24,11 +23,8 @@ export type POSConfirmationDialogProps = {};
  * Este componente muestra un dialog de confirmación con un mensaje personalizado y botones de aceptar y cancelar.
  */
 const POSConfirmationDialog: React.FC<POSConfirmationDialogProps> = () => {
-  const dispatcher = useDispatch();
-  const { isOpen, message } = useSelector((store: POSReducer) => store.confirm);
-  const handleResult = async (result: boolean) => {
-    dispatcher(setResponse(result));
-  };
+  const { setResult } = useSetResult();
+  const { isOpen, message } = useAppSelector((store) => store.confirm);
 
   return (
     <Dialog open={isOpen} fullWidth>
@@ -36,7 +32,7 @@ const POSConfirmationDialog: React.FC<POSConfirmationDialogProps> = () => {
         <div style={{ flex: "50%" }}>¿Estás seguro?</div>
         <div style={{ flex: "50%", textAlign: "end" }}>
           <Tooltip title="Cerrar">
-            <IconButton aria-label="logOut" onClick={() => handleResult(false)}>
+            <IconButton aria-label="logOut" onClick={() => setResult(false)}>
               <CloseIcon />
             </IconButton>
           </Tooltip>
@@ -46,14 +42,14 @@ const POSConfirmationDialog: React.FC<POSConfirmationDialogProps> = () => {
         <DialogContentText>{message}</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <POSButton onClick={() => handleResult(true)}>
+        <POSButton onClick={() => setResult(true)}>
           <CheckIcon /> Aceptar
         </POSButton>
         <Button
           variant="outlined"
           color="secondary"
           style={{ marginTop: "15px", width: "150px" }}
-          onClick={() => handleResult(false)}>
+          onClick={() => setResult(false)}>
           <CloseIcon /> Cancelar
         </Button>
       </DialogActions>

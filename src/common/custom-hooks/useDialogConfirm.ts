@@ -1,11 +1,10 @@
-import { POSReducer } from "@/redux";
+import { useAppDispatch, useAppSelector } from "@/redux";
 import { resetConfirm, setConfirm } from "@/redux/slices";
 import { useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 const useDialogConfirm = () => {
-  const dispatcher = useDispatch();
-  const { responseConfirmation } = useSelector((store: POSReducer) => store.confirm);
+  const dispatcher = useAppDispatch();
+  const { responseConfirmation } = useAppSelector((store) => store.confirm);
   const callbackConfirmation = useRef<Function>(() => {});
 
   const showDialogConfirm = (message: string, callback: Function) => {

@@ -1,3 +1,4 @@
+import { useAppDispatch } from "@/redux";
 import { logoutSession, setSession } from "@/redux/slices";
 import {
   Box,
@@ -14,7 +15,6 @@ import { useAxios } from "common/custom-hooks";
 import { LoginDTO, loginDTOEmpty } from "common/dtos";
 import { useFormik } from "formik";
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import logo from "../../assets/logo.svg";
@@ -26,7 +26,7 @@ const initialValues: FormValues = { ...loginDTOEmpty };
 
 const Login: React.FC<LoginProps> = () => {
   const theme = useTheme();
-  const dispatcher = useDispatch();
+  const dispatcher = useAppDispatch();
   const navigate = useNavigate();
   const { login } = useAxios(APIControllers.LOGIN);
 

@@ -1,4 +1,4 @@
-import { POSReducer } from "@/redux";
+import { useAppSelector } from "@/redux";
 import { parseJwt } from "@/utilities";
 import SaveIcon from "@mui/icons-material/Save";
 import { Box, DialogActions, DialogContent } from "@mui/material";
@@ -8,7 +8,6 @@ import { useAxios } from "common/custom-hooks";
 import { PurchaseRequestDTO, SelectDTO, purchaseRequestDTOEmpty } from "common/dtos";
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import * as Yup from "yup";
 import { usePurchasingProcessContext } from "../../context";
 
@@ -28,7 +27,7 @@ const PurchasingProcessDialog: React.FC<PurchasingProcessDialogProps> = () => {
     idSelected,
     setIdSelected,
   } = usePurchasingProcessContext();
-  const { token } = useSelector((store: POSReducer) => store.session);
+  const { token } = useAppSelector((store) => store.session);
   const { post, update, getById } = useAxios(APIControllers.PURCHASES);
   const { selects } = useAxios();
   const [suppliers, setSuppliers] = useState<SelectDTO[]>([]);

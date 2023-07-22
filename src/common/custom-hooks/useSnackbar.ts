@@ -1,9 +1,9 @@
+import { useAppDispatch } from "@/redux";
 import { setSnackbar } from "@/redux/slices";
-import { useDispatch } from "react-redux";
 import { AlertColors } from "../consts";
 
 const useSnackbar = () => {
-  const dispatcher = useDispatch();
+  const dispatcher = useAppDispatch();
   
   const showSnackbar = (message: string, severity: AlertColors) => {
     dispatcher(
